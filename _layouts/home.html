@@ -3,17 +3,17 @@ layout: default
 ---
 
 <div class="home-header">
-  <h1>大模型实践分享平台</h1>
-  <p class="home-description">专注大模型技术实践与应用案例的分享社区</p>
+  <h1>大模型理论与实践</h1>
+  <p class="home-description">探索大模型前沿技术与最佳实践案例</p>
   
   <div class="home-features">
     <div class="feature-item">
-      <span class="feature-icon">📚</span>
-      <span class="feature-text">最佳实践</span>
+      <span class="feature-icon">🧠</span>
+      <span class="feature-text">模型原理</span>
     </div>
     <div class="feature-item">
       <span class="feature-icon">🚀</span>
-      <span class="feature-text">技术干货</span>
+      <span class="feature-text">前沿技术</span>
     </div>
     <div class="feature-item">
       <span class="feature-icon">💡</span>
@@ -67,25 +67,25 @@ layout: default
   <div class="home-section">
     <h2 class="home-section-title">
       <span class="section-icon">🔥</span>
-      热门教程
+      热门主题
     </h2>
     
     <div class="home-tutorials">
+      <a href="/tutorials/#Transformer基础" class="home-tutorial-item">
+        <span class="tutorial-icon">🧩</span>
+        <span class="tutorial-title">Transformer基础</span>
+      </a>
+      <a href="/tutorials/#注意力机制" class="home-tutorial-item">
+        <span class="tutorial-icon">👁️</span>
+        <span class="tutorial-title">注意力机制</span>
+      </a>
       <a href="/tutorials/#提示工程" class="home-tutorial-item">
         <span class="tutorial-icon">📝</span>
-        <span class="tutorial-title">Prompt工程入门</span>
-      </a>
-      <a href="/tutorials/#RAG实践" class="home-tutorial-item">
-        <span class="tutorial-icon">🔍</span>
-        <span class="tutorial-title">RAG实战指南</span>
+        <span class="tutorial-title">提示工程</span>
       </a>
       <a href="/tutorials/#微调技术" class="home-tutorial-item">
-        <span class="tutorial-icon">🧠</span>
-        <span class="tutorial-title">模型微调实践</span>
-      </a>
-      <a href="/tutorials/#推理优化" class="home-tutorial-item">
-        <span class="tutorial-icon">⚡</span>
-        <span class="tutorial-title">性能优化技巧</span>
+        <span class="tutorial-icon">🎯</span>
+        <span class="tutorial-title">微调技术</span>
       </a>
     </div>
   </div>
@@ -95,54 +95,84 @@ layout: default
   /* 首页样式 */
   .home-header {
     text-align: center;
-    padding: 30px 0;
+    padding: 40px 0;
     margin-bottom: 30px;
-    background: linear-gradient(135deg, rgba(247, 250, 255, 0.9) 0%, rgba(235, 242, 253, 0.9) 100%);
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
     border-radius: 15px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .home-header:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M50,30 L75,50 L50,70 L25,50 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+    background-size: 60px 60px;
+    opacity: 0.2;
   }
   
   .home-header h1 {
-    color: var(--primary-color);
-    font-size: 2.2em;
+    color: white;
+    font-size: 2.5em;
     margin-bottom: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
   }
   
   .home-description {
-    color: #666;
+    color: rgba(255, 255, 255, 0.9);
     font-size: 1.2em;
     max-width: 600px;
     margin: 0 auto 20px;
+    position: relative;
   }
   
   .home-features {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    margin-top: 25px;
+    gap: 40px;
+    margin-top: 30px;
+    position: relative;
   }
   
   .feature-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    transition: transform 0.3s;
+  }
+  
+  .feature-item:hover {
+    transform: translateY(-5px);
   }
   
   .feature-icon {
-    font-size: 2em;
+    font-size: 2.5em;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
   }
   
   .feature-text {
     font-weight: 500;
-    color: #555;
+    color: rgba(255, 255, 255, 0.9);
   }
   
   .home-content {
-    margin-top: 40px;
+    margin-top: 50px;
   }
   
   .home-section {
-    margin-bottom: 50px;
+    margin-bottom: 60px;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   }
   
   .home-section-title {
@@ -150,13 +180,31 @@ layout: default
     align-items: center;
     color: var(--primary-color);
     font-size: 1.8em;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+    position: relative;
+  }
+  
+  .home-section-title:after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: var(--primary-color);
   }
   
   .section-icon {
-    margin-right: 10px;
+    margin-right: 15px;
+    background: rgba(12, 113, 224, 0.1);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
   }
   
   /* 文章列表样式 */
@@ -170,10 +218,17 @@ layout: default
     margin-bottom: 30px;
     padding-bottom: 30px;
     border-bottom: 1px solid #f0f0f0;
+    transition: transform 0.3s;
+  }
+  
+  .post-item:hover {
+    transform: translateX(5px);
   }
   
   .post-item:last-child {
     border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
   }
   
   .post-meta {
@@ -190,6 +245,11 @@ layout: default
     display: block;
     margin-bottom: 10px;
     line-height: 1.3;
+    transition: color 0.3s;
+  }
+  
+  .post-link:hover {
+    color: var(--accent-color);
   }
   
   .post-excerpt {
@@ -211,6 +271,12 @@ layout: default
     padding: 3px 10px;
     border-radius: 15px;
     font-size: 0.85em;
+    transition: all 0.3s;
+  }
+  
+  .post-category:hover {
+    background: #b3e5fc;
+    transform: translateY(-2px);
   }
   
   .post-tag-list {
@@ -225,28 +291,35 @@ layout: default
     padding: 3px 10px;
     border-radius: 15px;
     font-size: 0.85em;
+    transition: all 0.3s;
+  }
+  
+  .post-tag:hover {
+    background: #c8e6c9;
+    transform: translateY(-2px);
   }
   
   .home-see-all {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 30px;
   }
   
   .see-all-btn {
     display: inline-block;
     background: var(--primary-color);
     color: white;
-    padding: 8px 20px;
+    padding: 10px 25px;
     border-radius: 30px;
     text-decoration: none;
     transition: all 0.3s;
     font-weight: 500;
+    box-shadow: 0 4px 10px rgba(12, 113, 224, 0.2);
   }
   
   .see-all-btn:hover {
-    background: darken(var(--primary-color), 10%);
+    background: var(--accent-color);
     transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(58, 123, 213, 0.3);
+    box-shadow: 0 6px 15px rgba(108, 99, 255, 0.3);
     color: white;
   }
   
@@ -261,50 +334,74 @@ layout: default
   .home-tutorial-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 15px;
+    gap: 15px;
+    padding: 20px;
     background: white;
     border-radius: 10px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.05);
     transition: all 0.3s;
     text-decoration: none;
     color: inherit;
+    border: 1px solid #f0f0f0;
   }
   
   .home-tutorial-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border-color: var(--primary-color);
   }
   
   .tutorial-icon {
-    font-size: 1.5em;
+    font-size: 1.8em;
+    background: rgba(12, 113, 224, 0.1);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: var(--primary-color);
   }
   
   .tutorial-title {
     font-weight: 500;
     color: var(--primary-color);
+    font-size: 1.1em;
   }
   
   /* 移动端适配 */
   @media screen and (max-width: 767px) {
     .home-header {
-      padding: 20px 0;
+      padding: 30px 0;
+    }
+    
+    .home-header h1 {
+      font-size: 2em;
     }
     
     .home-features {
-      gap: 15px;
+      gap: 20px;
     }
     
     .feature-icon {
-      font-size: 1.6em;
+      font-size: 2em;
     }
     
     .feature-text {
       font-size: 0.9em;
     }
     
+    .home-section {
+      padding: 20px;
+    }
+    
     .home-section-title {
       font-size: 1.5em;
+    }
+    
+    .section-icon {
+      width: 35px;
+      height: 35px;
     }
     
     .post-link {
@@ -315,15 +412,21 @@ layout: default
       margin-bottom: 25px;
       padding-bottom: 25px;
     }
+    
+    .tutorial-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 1.5em;
+    }
   }
   
   @media screen and (max-width: 480px) {
     .home-features {
-      gap: 10px;
+      gap: 15px;
     }
     
     .feature-icon {
-      font-size: 1.4em;
+      font-size: 1.7em;
     }
     
     .feature-text {
@@ -342,6 +445,20 @@ layout: default
     
     .home-tutorials {
       grid-template-columns: 1fr;
+    }
+    
+    .home-tutorial-item {
+      padding: 15px;
+    }
+    
+    .tutorial-icon {
+      width: 35px;
+      height: 35px;
+      font-size: 1.3em;
+    }
+    
+    .tutorial-title {
+      font-size: 1em;
     }
   }
 </style>
