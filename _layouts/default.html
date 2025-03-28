@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "zh-CN" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include header.html -%}
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        {{ content }}
+      </div>
+    </main>
+
+    <footer class="site-footer h-card">
+      <div class="wrapper">
+        <div class="footer-col-wrapper">
+          <div class="footer-col footer-col-1">
+            <h3>关于本站</h3>
+            <p>{{ site.description | escape }}</p>
+          </div>
+          <div class="footer-col footer-col-2">
+            <h3>联系我们</h3>
+            <ul class="contact-list">
+              <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+              {% if site.github_username %}
+              <li><a href="https://github.com/{{ site.github_username }}">GitHub: {{ site.github_username }}</a></li>
+              {% endif %}
+            </ul>
+          </div>
+          <div class="footer-col footer-col-3">
+            <h3>快速链接</h3>
+            <ul class="quick-links">
+              <li><a href="/categories/">实践专题</a></li>
+              <li><a href="/tags/">技术标签</a></li>
+              <li><a href="/tutorials/">入门实战</a></li>
+              <li><a href="/projects/">案例项目</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>© {{ site.time | date: '%Y' }} {{ site.title | escape }}. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+  </body>
+
+</html>

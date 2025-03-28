@@ -1,0 +1,347 @@
+---
+layout: default
+---
+
+<div class="home-header">
+  <h1>大模型实践分享平台</h1>
+  <p class="home-description">专注大模型技术实践与应用案例的分享社区</p>
+  
+  <div class="home-features">
+    <div class="feature-item">
+      <span class="feature-icon">📚</span>
+      <span class="feature-text">最佳实践</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon">🚀</span>
+      <span class="feature-text">技术干货</span>
+    </div>
+    <div class="feature-item">
+      <span class="feature-icon">💡</span>
+      <span class="feature-text">实战案例</span>
+    </div>
+  </div>
+</div>
+
+<div class="home-content">
+  <div class="home-section">
+    <h2 class="home-section-title">
+      <span class="section-icon">📝</span>
+      最新文章
+    </h2>
+    
+    {%- if site.posts.size > 0 -%}
+    <ul class="post-list">
+      {%- for post in site.posts limit:5 -%}
+      <li class="post-item">
+        <span class="post-meta">{{ post.date | date: "%Y-%m-%d" }}</span>
+        <h3>
+          <a class="post-link" href="{{ post.url | relative_url }}">
+            {{ post.title | escape }}
+          </a>
+        </h3>
+        {%- if post.excerpt -%}
+        <div class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</div>
+        {%- endif -%}
+        <div class="post-tags">
+          {%- if post.categories.size > 0 -%}
+            <span class="post-category">{{ post.categories | join: ", " }}</span>
+          {%- endif -%}
+          {%- if post.tags.size > 0 -%}
+            <span class="post-tag-list">
+              {%- for tag in post.tags -%}
+                <span class="post-tag">{{ tag }}</span>
+              {%- endfor -%}
+            </span>
+          {%- endif -%}
+        </div>
+      </li>
+      {%- endfor -%}
+    </ul>
+    
+    <div class="home-see-all">
+      <a href="/categories/" class="see-all-btn">查看所有文章</a>
+    </div>
+    {%- endif -%}
+  </div>
+  
+  <div class="home-section">
+    <h2 class="home-section-title">
+      <span class="section-icon">🔥</span>
+      热门教程
+    </h2>
+    
+    <div class="home-tutorials">
+      <a href="/tutorials/#提示工程" class="home-tutorial-item">
+        <span class="tutorial-icon">📝</span>
+        <span class="tutorial-title">Prompt工程入门</span>
+      </a>
+      <a href="/tutorials/#RAG实践" class="home-tutorial-item">
+        <span class="tutorial-icon">🔍</span>
+        <span class="tutorial-title">RAG实战指南</span>
+      </a>
+      <a href="/tutorials/#微调技术" class="home-tutorial-item">
+        <span class="tutorial-icon">🧠</span>
+        <span class="tutorial-title">模型微调实践</span>
+      </a>
+      <a href="/tutorials/#推理优化" class="home-tutorial-item">
+        <span class="tutorial-icon">⚡</span>
+        <span class="tutorial-title">性能优化技巧</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* 首页样式 */
+  .home-header {
+    text-align: center;
+    padding: 30px 0;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, rgba(247, 250, 255, 0.9) 0%, rgba(235, 242, 253, 0.9) 100%);
+    border-radius: 15px;
+  }
+  
+  .home-header h1 {
+    color: var(--primary-color);
+    font-size: 2.2em;
+    margin-bottom: 10px;
+  }
+  
+  .home-description {
+    color: #666;
+    font-size: 1.2em;
+    max-width: 600px;
+    margin: 0 auto 20px;
+  }
+  
+  .home-features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 25px;
+  }
+  
+  .feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .feature-icon {
+    font-size: 2em;
+  }
+  
+  .feature-text {
+    font-weight: 500;
+    color: #555;
+  }
+  
+  .home-content {
+    margin-top: 40px;
+  }
+  
+  .home-section {
+    margin-bottom: 50px;
+  }
+  
+  .home-section-title {
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 10px;
+  }
+  
+  .section-icon {
+    margin-right: 10px;
+  }
+  
+  /* 文章列表样式 */
+  .post-list {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  
+  .post-item {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .post-item:last-child {
+    border-bottom: none;
+  }
+  
+  .post-meta {
+    display: block;
+    color: #888;
+    font-size: 0.9em;
+    margin-bottom: 8px;
+  }
+  
+  .post-link {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  
+  .post-excerpt {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.5;
+  }
+  
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .post-category {
+    background: #e1f5fe;
+    color: #0288d1;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 0.85em;
+  }
+  
+  .post-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .post-tag {
+    background: #e8f5e9;
+    color: #388e3c;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 0.85em;
+  }
+  
+  .home-see-all {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .see-all-btn {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s;
+    font-weight: 500;
+  }
+  
+  .see-all-btn:hover {
+    background: darken(var(--primary-color), 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(58, 123, 213, 0.3);
+    color: white;
+  }
+  
+  /* 教程部分样式 */
+  .home-tutorials {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .home-tutorial-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .home-tutorial-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .tutorial-icon {
+    font-size: 1.5em;
+  }
+  
+  .tutorial-title {
+    font-weight: 500;
+    color: var(--primary-color);
+  }
+  
+  /* 移动端适配 */
+  @media screen and (max-width: 767px) {
+    .home-header {
+      padding: 20px 0;
+    }
+    
+    .home-features {
+      gap: 15px;
+    }
+    
+    .feature-icon {
+      font-size: 1.6em;
+    }
+    
+    .feature-text {
+      font-size: 0.9em;
+    }
+    
+    .home-section-title {
+      font-size: 1.5em;
+    }
+    
+    .post-link {
+      font-size: 1.3em;
+    }
+    
+    .post-item {
+      margin-bottom: 25px;
+      padding-bottom: 25px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .home-features {
+      gap: 10px;
+    }
+    
+    .feature-icon {
+      font-size: 1.4em;
+    }
+    
+    .feature-text {
+      font-size: 0.8em;
+    }
+    
+    .post-tags {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    
+    .post-category, .post-tag {
+      font-size: 0.8em;
+    }
+    
+    .home-tutorials {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,1 +1,169 @@
- 
+<header class="site-header">
+  <div class="wrapper">
+    {%- assign default_paths = site.pages | map: "path" -%}
+    {%- assign page_paths = site.header_pages | default: default_paths -%}
+    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+
+    {%- if page_paths -%}
+      <nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger">
+          <a class="page-link" href="/categories/">实践专题</a>
+          <a class="page-link" href="/tags/">技术标签</a>
+          <a class="page-link page-link-highlight" href="/tutorials/">入门实战</a>
+          <a class="page-link" href="/projects/">案例项目</a>
+          <a class="page-link" href="/resources/">资源导航</a>
+          <a class="page-link" href="/search/"><span class="search-icon-wrapper"><svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span></a>
+        </div>
+      </nav>
+    {%- endif -%}
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-top: 5px solid #3a7bd5;
+    border-bottom: 1px solid #e8e8e8;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 10px 0;
+  }
+  
+  .site-title {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #3a7bd5;
+    font-size: 1.8rem;
+    transition: all 0.3s;
+  }
+  
+  .site-title:hover {
+    text-decoration: none;
+    transform: scale(1.05);
+  }
+  
+  .site-nav {
+    display: flex;
+    align-items: center;
+  }
+  
+  .page-link {
+    margin-left: 20px !important;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s;
+    color: #444;
+    position: relative;
+  }
+  
+  .page-link:hover {
+    color: #3a7bd5;
+  }
+  
+  .page-link:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #3a7bd5;
+    transition: width 0.3s;
+  }
+  
+  .page-link:hover:after {
+    width: 100%;
+  }
+  
+  .page-link-highlight {
+    background: #3a7bd5;
+    color: white !important;
+    padding: 8px 15px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(58, 123, 213, 0.2);
+  }
+  
+  .page-link-highlight:hover {
+    background: #2a6bc7;
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(58, 123, 213, 0.3);
+  }
+  
+  .page-link-highlight:after {
+    display: none;
+  }
+  
+  .search-icon {
+    margin-bottom: -3px;
+  }
+  
+  @media screen and (max-width: 600px) {
+    .site-header {
+      padding: 8px 0;
+    }
+    
+    .site-title {
+      font-size: 1.4rem;
+      padding: 10px 0;
+    }
+    
+    .nav-trigger:checked ~ .trigger {
+      display: block;
+      position: absolute;
+      top: 100%;
+      right: 10px;
+      left: 10px;
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+      overflow: hidden;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    
+    .menu-icon {
+      padding: 10px;
+    }
+    
+    .page-link {
+      margin: 10px 0 !important;
+      padding: 12px 0;
+      display: block;
+      text-align: center;
+      border-radius: 8px;
+      font-size: 1.1rem;
+    }
+    
+    .page-link:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .page-link-highlight {
+      margin: 10px 0 !important;
+      padding: 12px 15px !important;
+      display: block;
+    }
+    
+    /* 给搜索图标添加包装以增加点击区域 */
+    .search-icon-wrapper {
+      display: block;
+      text-align: center;
+      padding: 10px 0;
+    }
+    
+    .search-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+</style> 

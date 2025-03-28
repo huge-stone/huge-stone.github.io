@@ -18,36 +18,55 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Huge Stone的技术博客
+title: 大模型实践分享
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-  我的技术博客，分享编程、技术和开发经验。主要包含Markdown内容和技术分享。
+  专注于大模型技术实践与应用案例的分享平台，涵盖LLM实战技巧、应用开发、落地经验、最佳实践等内容。
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://huge-stone.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
 github_username:  huge-stone
 
+# 添加页面集合配置
+include: ["_pages"]
+
 # Build settings
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+# 标签和分类设置
+permalink: /:year/:month/:day/:title/
+
+# 确保GitHub Pages能正确处理
+markdown: kramdown
+
+# 自定义导航链接
+header_pages:
+  - _pages/categories.md
+  - _pages/tags.md
+  - _pages/tutorials.md
+  - _pages/projects.md
+  - _pages/resources.md
+  - _pages/search.md
+
+# 排除不需要的文件
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# 添加Disqus评论系统配置
+disqus:
+  shortname: huge-stone-blog # 替换为您在Disqus上注册的shortname
+
+# 添加Google Analytics配置
+google_analytics: G-XXXXXXXXXX # 替换为您的Google Analytics跟踪ID
