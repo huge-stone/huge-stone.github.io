@@ -2,12 +2,19 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <meta name="theme-color" content="#3a7bd5"> <!-- 移动端状态栏颜色 -->
+  <meta name="theme-color" content="#fc4d35"> <!-- 移动端状态栏颜色 -->
   <meta name="format-detection" content="telephone=no"> <!-- 禁止自动识别电话号码 -->
   <meta name="apple-mobile-web-app-capable" content="yes"> <!-- iOS Web App模式 -->
   <meta name="apple-mobile-web-app-status-bar-style" content="default"> <!-- iOS状态栏样式 -->
   
-  {%- seo -%}
+  <!-- 覆盖默认的SEO标题，确保所有页面保持一致的网站标题 -->
+  <title>{% if page.title %}{{ page.title | escape }} - {% endif %}{{ site.title | escape }}</title>
+  <meta property="og:title" content="{% if page.title %}{{ page.title | escape }} - {% endif %}{{ site.title | escape }}">
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title | escape }} - {% endif %}{{ site.title | escape }}">
+  <meta name="description" content="{{ site.description }}">
+  <meta property="og:description" content="{{ site.description }}">
+  <meta name="twitter:description" content="{{ site.description }}">
+  
   <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
   {%- feed_meta -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}

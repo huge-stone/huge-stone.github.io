@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 入门实战
+title: 大模型理论
 permalink: /tutorials/
 ---
 
@@ -98,13 +98,13 @@ permalink: /tutorials/
   
   .tutorial-header h1 {
     color: var(--primary-color);
-    font-size: 2.2em;
+    font-size: 2rem;
     margin-bottom: 10px;
   }
   
   .tutorial-header p {
     color: #666;
-    font-size: 1.2em;
+    font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto;
   }
@@ -112,41 +112,46 @@ permalink: /tutorials/
   .tutorial-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
+    gap: 20px;
     margin-bottom: 50px;
   }
   
   .tutorial-card {
     background: white;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     transition: transform 0.3s, box-shadow 0.3s;
     display: flex;
     flex-direction: column;
+    border: 1px solid #eee;
   }
   
   .tutorial-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-color: var(--primary-color);
   }
   
   .tutorial-icon {
-    font-size: 2.5em;
+    font-size: 2.2rem;
     margin-bottom: 15px;
+    color: var(--primary-color);
   }
   
   .tutorial-card h3 {
     color: var(--primary-color);
     margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 1.3em;
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
   }
   
   .tutorial-card p {
     color: #666;
     margin-bottom: 20px;
     flex-grow: 1;
+    font-size: 0.95rem;
   }
   
   .tutorial-btn {
@@ -154,28 +159,43 @@ permalink: /tutorials/
     background: var(--primary-color);
     color: white;
     padding: 8px 20px;
-    border-radius: 30px;
+    border-radius: 4px;
     text-decoration: none;
     transition: all 0.3s;
     font-weight: 500;
     text-align: center;
+    font-size: 0.95rem;
   }
   
   .tutorial-btn:hover {
     background: darken(var(--primary-color), 10%);
     transform: translateY(-2px);
-    box-shadow: 0 5px 10px rgba(58, 123, 213, 0.3);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    color: white;
   }
   
   .tutorial-path {
-    margin-top: 60px;
+    margin-top: 50px;
   }
   
   .tutorial-path h2 {
     text-align: center;
     color: var(--primary-color);
     margin-bottom: 30px;
-    font-size: 1.8em;
+    font-size: 1.5rem;
+    position: relative;
+    padding-bottom: 10px;
+  }
+  
+  .tutorial-path h2:after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 3px;
+    background: var(--primary-color);
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
   
   .path-timeline {
@@ -190,13 +210,13 @@ permalink: /tutorials/
     top: 0;
     bottom: 0;
     left: 20px;
-    width: 3px;
-    background: var(--primary-color);
+    width: 2px;
+    background: #eee;
   }
   
   .path-item {
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     padding-left: 60px;
   }
   
@@ -207,146 +227,58 @@ permalink: /tutorials/
     width: 40px;
     height: 40px;
     background: var(--primary-color);
-    color: white;
     border-radius: 50%;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     z-index: 1;
   }
   
   .path-content {
     background: white;
-    padding: 20px 25px;
-    border-radius: 8px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    padding: 15px 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
   }
   
   .path-content h3 {
     margin-top: 0;
+    margin-bottom: 8px;
     color: var(--primary-color);
-    margin-bottom: 10px;
+    font-size: 1.1rem;
   }
   
   .path-content p {
-    margin-bottom: 0;
+    margin: 0;
     color: #666;
+    font-size: 0.95rem;
   }
   
-  @media screen and (max-width: 767px) {
-    .tutorial-header h1 {
-      font-size: 1.8em;
-    }
-    
-    .tutorial-header p {
-      font-size: 1em;
-    }
-    
-    .tutorial-grid {
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    
-    .tutorial-card {
-      padding: 20px;
-    }
-    
-    .tutorial-icon {
-      font-size: 2.2em;
-    }
-    
-    .path-timeline:before {
-      left: 18px;
-    }
-    
-    .path-item {
-      padding-left: 55px;
-    }
-    
-    .path-number {
-      width: 36px;
-      height: 36px;
-    }
-    
-    .tutorial-btn {
-      width: 100%;
-      text-align: center;
-      padding: 10px;
-    }
-    
-    .path-content {
-      padding: 15px 20px;
-    }
-  }
-  
-  @media screen and (max-width: 480px) {
+  @media (max-width: 768px) {
     .tutorial-grid {
       grid-template-columns: 1fr;
     }
     
-    .tutorial-card {
-      padding: 15px;
+    .tutorial-header h1 {
+      font-size: 1.7rem;
     }
     
-    .tutorial-card h3 {
-      font-size: 1.2em;
-    }
-    
-    .tutorial-icon {
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
-    
-    .tutorial-card p {
-      font-size: 0.95em;
-    }
-    
-    .tutorial-btn {
-      padding: 10px 15px;
-      font-size: 0.95em;
-      border-radius: 25px;
-    }
-    
-    .path-timeline:before {
-      left: 15px;
-      width: 2px;
+    .tutorial-header p {
+      font-size: 1rem;
     }
     
     .path-item {
-      padding-left: 45px;
-      margin-bottom: 25px;
+      padding-left: 50px;
     }
     
     .path-number {
-      width: 30px;
-      height: 30px;
-      font-size: 1em;
-    }
-    
-    .path-content {
-      padding: 15px;
-    }
-    
-    .path-content h3 {
-      font-size: 1.1em;
-    }
-    
-    .path-content p {
-      font-size: 0.9em;
-    }
-    
-    /* 触摸优化 */
-    .tutorial-btn {
-      -webkit-appearance: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-    
-    /* 移动端上下页面空间优化 */
-    .tutorial-path {
-      margin-top: 40px;
-      padding-bottom: 20px;
+      width: 32px;
+      height: 32px;
+      font-size: 1rem;
     }
   }
 </style> 

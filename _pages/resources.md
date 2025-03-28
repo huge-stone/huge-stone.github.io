@@ -5,13 +5,13 @@ permalink: /resources/
 ---
 
 <div class="resources-header">
-  <h1>大模型实践资源</h1>
+  <h1>大模型开发资源</h1>
   <p>精选大模型开发与应用相关的优质学习资源</p>
 </div>
 
 <div class="resources-container">
   <div class="resource-category">
-    <h2><i class="resource-icon">📚</i> 学习资料</h2>
+    <h2><i class="fas fa-book"></i> 学习资料</h2>
     <div class="resource-list">
       <div class="resource-card">
         <h3>Prompt Engineering Guide</h3>
@@ -34,7 +34,7 @@ permalink: /resources/
   </div>
   
   <div class="resource-category">
-    <h2><i class="resource-icon">🛠️</i> 开发工具</h2>
+    <h2><i class="fas fa-tools"></i> 开发工具</h2>
     <div class="resource-list">
       <div class="resource-card">
         <h3>Hugging Face</h3>
@@ -57,7 +57,7 @@ permalink: /resources/
   </div>
   
   <div class="resource-category">
-    <h2><i class="resource-icon">🚀</i> 部署方案</h2>
+    <h2><i class="fas fa-rocket"></i> 部署方案</h2>
     <div class="resource-list">
       <div class="resource-card">
         <h3>Ollama</h3>
@@ -80,7 +80,7 @@ permalink: /resources/
   </div>
   
   <div class="resource-category">
-    <h2><i class="resource-icon">🔍</i> 向量数据库</h2>
+    <h2><i class="fas fa-database"></i> 向量数据库</h2>
     <div class="resource-list">
       <div class="resource-card">
         <h3>Pinecone</h3>
@@ -103,7 +103,7 @@ permalink: /resources/
   </div>
   
   <div class="resource-category">
-    <h2><i class="resource-icon">📊</i> 评估工具</h2>
+    <h2><i class="fas fa-chart-line"></i> 评估工具</h2>
     <div class="resource-list">
       <div class="resource-card">
         <h3>RAGAS</h3>
@@ -129,45 +129,44 @@ permalink: /resources/
 <style>
   .resources-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
   
   .resources-header h1 {
     color: var(--primary-color);
-    font-size: 2.2em;
+    font-size: 2rem;
     margin-bottom: 10px;
   }
   
   .resources-header p {
     color: #666;
-    font-size: 1.2em;
+    font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto;
   }
   
   .resources-container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
   }
   
   .resource-category {
-    margin-bottom: 40px;
+    margin-bottom: 35px;
   }
   
   .resource-category h2 {
     color: var(--primary-color);
-    font-size: 1.6em;
+    font-size: 1.4rem;
     margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
     display: flex;
     align-items: center;
   }
   
-  .resource-icon {
-    font-style: normal;
+  .resource-category h2 i {
     margin-right: 10px;
-    font-size: 1.2em;
+    color: var(--primary-color);
   }
   
   .resource-list {
@@ -178,40 +177,47 @@ permalink: /resources/
   
   .resource-card {
     background: white;
-    border-radius: 10px;
+    border-radius: 4px;
     padding: 20px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     transition: transform 0.3s, box-shadow 0.3s;
     height: 100%;
     display: flex;
     flex-direction: column;
+    border: 1px solid #eee;
   }
   
   .resource-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-color: var(--primary-color);
   }
   
   .resource-card h3 {
     color: var(--primary-color);
     margin-top: 0;
     margin-bottom: 10px;
-    font-size: 1.2em;
+    font-size: 1.2rem;
+    font-weight: 600;
   }
   
   .resource-card p {
     color: #666;
     margin-bottom: 15px;
+    line-height: 1.5;
     flex-grow: 1;
+    font-size: 0.95rem;
   }
   
   .resource-link {
     display: inline-block;
+    padding: 8px 15px;
     background: var(--primary-color);
     color: white;
-    padding: 8px 15px;
-    border-radius: 5px;
     text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
     transition: all 0.3s;
     text-align: center;
     margin-top: auto;
@@ -220,79 +226,29 @@ permalink: /resources/
   .resource-link:hover {
     background: darken(var(--primary-color), 10%);
     transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
     color: white;
   }
   
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .resource-list {
       grid-template-columns: 1fr;
     }
-  }
-  
-  @media screen and (max-width: 767px) {
+    
     .resources-header h1 {
-      font-size: 1.8em;
+      font-size: 1.7rem;
     }
     
     .resources-header p {
-      font-size: 1em;
+      font-size: 1rem;
     }
     
     .resource-category h2 {
-      font-size: 1.4em;
-    }
-    
-    .resource-list {
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 15px;
-    }
-    
-    .resource-link {
-      width: 100%;
-      text-align: center;
-    }
-  }
-  
-  @media screen and (max-width: 480px) {
-    .resource-list {
-      grid-template-columns: 1fr;
-    }
-    
-    .resource-card {
-      padding: 15px;
+      font-size: 1.3rem;
     }
     
     .resource-card h3 {
-      font-size: 1.1em;
-    }
-    
-    .resource-card p {
-      font-size: 0.95em;
-    }
-    
-    .resource-link {
-      padding: 10px 15px;
-    }
-    
-    /* 移动端触摸优化 */
-    .resource-link {
-      -webkit-appearance: none;
-      -webkit-tap-highlight-color: transparent;
-      cursor: pointer;
-      height: auto;
-      line-height: normal;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    /* 移动端上下页面空间优化 */
-    .resource-category:first-child {
-      margin-top: 10px;
-    }
-    
-    .resource-category:last-child {
-      margin-bottom: 20px;
+      font-size: 1.1rem;
     }
   }
 </style> 

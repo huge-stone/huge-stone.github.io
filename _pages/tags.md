@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 技术标签
+title: 技术专题
 permalink: /tags/
 ---
 
@@ -104,70 +104,116 @@ permalink: /tags/
 </div>
 
 <style>
-.tag-cloud {
-  margin: 20px 0 40px;
-  padding: 20px;
-  background: #f7f7f7;
-  border-radius: 10px;
-  text-align: center;
-  line-height: 2.2;
-}
-.tag-item {
-  display: inline-block;
-  margin: 5px;
-  padding: 2px 10px;
-  background: #eef;
-  border-radius: 15px;
-  text-decoration: none;
-  color: #47a;
-  transition: all 0.3s;
-}
-.tag-item:hover {
-  background: #ddf;
-  transform: scale(1.05);
-}
-.tag-item span {
-  font-size: 0.8em;
-  color: #999;
-}
+/* 使用全局样式变量保持一致性 */
 .tags-page h2 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
   margin-top: 30px;
+  padding-bottom: 8px;
   border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-}
-.tags-page ul {
-  margin-left: 20px;
-}
-.tags-page small {
-  color: #999;
-  margin-left: 10px;
-}
-.tag-groups {
-  margin-top: 50px;
-  padding-top: 30px;
-  border-top: 2px solid #eee;
-}
-.tag-group {
-  margin-bottom: 25px;
-  padding: 15px;
-  background: #f9f9f9;
-  border-radius: 5px;
-}
-.tag-group h3 {
-  color: #2a7ae2;
-  margin-top: 0;
   margin-bottom: 15px;
 }
+
+.tags-page ul {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.tags-page li {
+  margin-bottom: 8px;
+}
+
+.tags-page small {
+  color: var(--text-light);
+  font-size: 0.85rem;
+  margin-left: 8px;
+}
+
+.tag-groups {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.tag-groups h2 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  text-align: center;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.tag-groups h2:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background-color: var(--primary-color);
+}
+
+.tag-group {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  transition: transform 0.3s;
+  border: 1px solid #eee;
+}
+
+.tag-group:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  border-color: var(--primary-color);
+}
+
+.tag-group h3 {
+  color: var(--primary-color);
+  margin-top: 0;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
 .tag-list a {
   display: inline-block;
-  margin: 5px;
+  margin: 4px;
   padding: 3px 10px;
-  background: #e8f0f9;
-  border-radius: 4px;
+  background: #f8f9fa;
+  border-radius: 15px;
   text-decoration: none;
-  color: #3a7bd5;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  transition: all 0.3s;
 }
+
 .tag-list a:hover {
-  background: #d0e1f5;
+  background: rgba(252, 79, 55, 0.05);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .tag-group {
+    padding: 12px;
+  }
+  
+  .tag-list a {
+    margin: 3px;
+    padding: 3px 8px;
+    font-size: 0.85rem;
+  }
+  
+  .tag-groups h2 {
+    font-size: 1.3rem;
+  }
+  
+  .tag-group h3 {
+    font-size: 1rem;
+  }
 }
 </style> 

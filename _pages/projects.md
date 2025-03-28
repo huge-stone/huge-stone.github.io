@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 案例项目
+title: 项目实践
 permalink: /projects/
 ---
 
@@ -114,18 +114,18 @@ document.addEventListener('DOMContentLoaded', function() {
 <style>
   .projects-header {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
   
   .projects-header h1 {
     color: var(--primary-color);
-    font-size: 2.2em;
+    font-size: 2rem;
     margin-bottom: 10px;
   }
   
   .projects-header p {
     color: #666;
-    font-size: 1.2em;
+    font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto;
   }
@@ -135,48 +135,53 @@ document.addEventListener('DOMContentLoaded', function() {
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
   }
   
   .filter-btn {
-    background: #f0f7ff;
+    background: #f8f9fa;
     border: none;
     padding: 8px 15px;
-    border-radius: 20px;
+    border-radius: 4px;
     color: #444;
     cursor: pointer;
-    font-size: 0.95em;
+    font-size: 0.9rem;
     transition: all 0.3s;
+    border: 1px solid #eee;
   }
   
   .filter-btn:hover {
-    background: #e0f0ff;
+    background: #f1f1f1;
+    transform: translateY(-2px);
   }
   
   .filter-btn.active {
     background: var(--primary-color);
     color: white;
+    border-color: var(--primary-color);
   }
   
   .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
   }
   
   .project-card {
     display: flex;
     flex-direction: column;
     background: white;
-    border-radius: 10px;
+    border-radius: 4px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #eee;
   }
   
   .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border-color: var(--primary-color);
   }
   
   .project-image {
@@ -186,126 +191,75 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   
   .project-card h3 {
-    padding: 20px 20px 10px;
+    padding: 15px 15px 10px;
     margin: 0;
     color: var(--primary-color);
-    font-size: 1.3em;
+    font-size: 1.2rem;
+    font-weight: 600;
   }
   
   .project-tags {
-    padding: 0 20px 10px;
+    padding: 0 15px 10px;
     display: flex;
     gap: 8px;
   }
   
   .project-tags span {
-    background: #f0f7ff;
-    padding: 3px 10px;
+    background: #f8f9fa;
+    color: var(--text-color);
+    padding: 3px 8px;
     border-radius: 15px;
-    font-size: 0.8em;
-    color: var(--primary-color);
+    font-size: 0.8rem;
   }
   
   .project-card p {
-    padding: 0 20px;
-    margin: 0 0 20px;
+    padding: 0 15px 15px;
+    margin: 0;
     color: #666;
+    font-size: 0.95rem;
     flex-grow: 1;
   }
   
   .project-btn {
-    margin: 0 20px 20px;
-    display: inline-block;
+    margin: 0 15px 15px;
+    padding: 8px 0;
+    text-align: center;
     background: var(--primary-color);
     color: white;
-    padding: 8px 20px;
-    border-radius: 5px;
     text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.9rem;
     transition: all 0.3s;
-    text-align: center;
   }
   
   .project-btn:hover {
     background: darken(var(--primary-color), 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+    color: white;
   }
   
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     .projects-grid {
       grid-template-columns: 1fr;
+    }
+    
+    .projects-header h1 {
+      font-size: 1.7rem;
+    }
+    
+    .projects-header p {
+      font-size: 1rem;
     }
     
     .filter-btn {
       padding: 6px 12px;
-      font-size: 0.9em;
-    }
-  }
-  
-  @media screen and (max-width: 767px) {
-    .projects-grid {
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    
-    .projects-header h1 {
-      font-size: 1.8em;
-    }
-    
-    .projects-header p {
-      font-size: 1em;
-    }
-    
-    .project-image {
-      height: 160px;
+      font-size: 0.85rem;
     }
     
     .project-card h3 {
-      font-size: 1.2em;
-    }
-    
-    .project-btn {
-      width: 100%;
-      text-align: center;
-      padding: 10px;
-    }
-  }
-  
-  @media screen and (max-width: 480px) {
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .filter-btn {
-      padding: 8px 12px;
-      font-size: 0.9em;
-      border-radius: 30px;
-    }
-    
-    .projects-filter {
-      padding: 0 10px;
-    }
-    
-    .project-image {
-      height: 140px;
-    }
-    
-    .project-tags {
-      flex-wrap: wrap;
-    }
-    
-    .project-tags span {
-      margin-top: 5px;
-    }
-    
-    /* 移动端触摸优化 */
-    .project-card {
-      -webkit-tap-highlight-color: transparent;
-    }
-    
-    .project-btn, .filter-btn {
-      -webkit-appearance: none;
-      -webkit-tap-highlight-color: transparent;
-      cursor: pointer;
-      padding: 12px 20px;
+      font-size: 1.1rem;
     }
   }
 </style> 
