@@ -18,10 +18,10 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: 大模型理论与实践
+title: AGI SEEKING
 email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-  探索前沿大模型技术与最佳实践案例，分享大模型理论与落地经验。
+  探索通用人工智能前沿技术与最佳实践，分享大模型理论与落地经验。
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://huge-stone.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 
@@ -44,9 +44,8 @@ markdown: kramdown
 
 # 自定义导航链接
 header_pages:
-  - _pages/categories.md
-  - _pages/tags.md
   - _pages/tutorials.md
+  - _pages/tags.md
   - _pages/projects.md
   - _pages/resources.md
   - _pages/search.md

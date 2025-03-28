@@ -5,11 +5,11 @@ layout: default
 <div class="home">
   <section class="hero">
     <div class="hero-content">
-      <h1 class="hero-title">大模型理论与实践</h1>
-      <p class="hero-description">探索前沿大模型技术与最佳实践案例</p>
+      <h1 class="hero-title">AGI SEEKING</h1>
+      <p class="hero-description">探索通用人工智能前沿技术与最佳实践</p>
       <div class="hero-buttons">
-        <a href="/tutorials/" class="btn-primary">开始学习</a>
-        <a href="/categories/" class="btn-secondary">浏览分类</a>
+        <a href="/tutorials/" class="btn-primary">大模型理论</a>
+        <a href="/projects/" class="btn-secondary">项目实践</a>
       </div>
     </div>
   </section>
@@ -19,19 +19,19 @@ layout: default
       <div class="feature">
         <div class="feature-icon">🧠</div>
         <h3>模型原理</h3>
-        <p>深入理解大型语言模型和多模态模型的底层原理</p>
+        <p>深入理解大型语言模型和多模态模型的底层原理与技术架构</p>
       </div>
       
       <div class="feature">
         <div class="feature-icon">🚀</div>
-        <h3>前沿技术</h3>
-        <p>紧跟AI领域最新研究成果与前沿技术发展</p>
+        <h3>AGI探索</h3>
+        <p>追踪通用人工智能研究进展与前沿技术突破</p>
       </div>
       
       <div class="feature">
         <div class="feature-icon">💡</div>
         <h3>实战案例</h3>
-        <p>实用的大模型应用开发与落地实践案例分享</p>
+        <p>分享AI应用开发与落地实践的经验与最佳实践</p>
       </div>
     </div>
   </section>
@@ -68,7 +68,7 @@ layout: default
     </ul>
     
     <div class="see-all">
-      <a href="/categories/" class="see-all-link">查看所有文章 →</a>
+      <a href="/tags/" class="see-all-link">查看所有文章 →</a>
     </div>
     {%- endif -%}
   </section>
@@ -76,14 +76,14 @@ layout: default
   <section class="topics">
     <h2 class="section-title">热门主题</h2>
     <div class="topics-grid">
-      <a href="/tutorials/#Transformer基础" class="topic-card">
+      <a href="/tutorials/#大型语言模型" class="topic-card">
         <span class="topic-icon">🧩</span>
-        <h3 class="topic-title">Transformer基础</h3>
+        <h3 class="topic-title">大型语言模型</h3>
         <span class="topic-arrow">→</span>
       </a>
-      <a href="/tutorials/#注意力机制" class="topic-card">
+      <a href="/tutorials/#多模态模型" class="topic-card">
         <span class="topic-icon">👁️</span>
-        <h3 class="topic-title">注意力机制</h3>
+        <h3 class="topic-title">多模态模型</h3>
         <span class="topic-arrow">→</span>
       </a>
       <a href="/tutorials/#提示工程" class="topic-card">
@@ -91,9 +91,9 @@ layout: default
         <h3 class="topic-title">提示工程</h3>
         <span class="topic-arrow">→</span>
       </a>
-      <a href="/tutorials/#微调技术" class="topic-card">
-        <span class="topic-icon">🎯</span>
-        <h3 class="topic-title">微调技术</h3>
+      <a href="/tutorials/#智能代理" class="topic-card">
+        <span class="topic-icon">��</span>
+        <h3 class="topic-title">智能代理</h3>
         <span class="topic-arrow">→</span>
       </a>
     </div>
@@ -103,32 +103,32 @@ layout: default
 <style>
   /* 主页样式 */
   .home {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
   }
   
   /* 英雄区域 */
   .hero {
-    padding: 80px 0;
+    padding: 60px 0;
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
     background-color: #f8f9fa;
-    border-radius: 5px;
+    border-radius: 4px;
   }
   
   .hero-title {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: var(--primary-color);
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     line-height: 1.2;
   }
   
   .hero-description {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: var(--text-color);
     max-width: 600px;
-    margin: 0 auto 30px;
+    margin: 0 auto 25px;
     line-height: 1.5;
   }
   
@@ -140,13 +140,13 @@ layout: default
   
   .btn-primary {
     display: inline-block;
-    padding: 12px 28px;
+    padding: 10px 24px;
     background-color: var(--primary-color);
     color: white;
     text-decoration: none;
     border-radius: 4px;
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1rem;
     transition: all 0.3s;
   }
   
@@ -159,14 +159,14 @@ layout: default
   
   .btn-secondary {
     display: inline-block;
-    padding: 12px 28px;
+    padding: 10px 24px;
     background-color: transparent;
     color: var(--primary-color);
     text-decoration: none;
     border: 1px solid var(--primary-color);
     border-radius: 4px;
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1rem;
     transition: all 0.3s;
   }
   
@@ -178,54 +178,55 @@ layout: default
   
   /* 特性区域 */
   .features {
-    margin-bottom: 80px;
+    margin-bottom: 60px;
   }
   
   .feature-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    gap: 25px;
   }
   
   .feature {
-    padding: 30px;
+    padding: 25px;
     border: 1px solid #eeeeee;
-    border-radius: 5px;
+    border-radius: 4px;
     transition: all 0.3s;
     text-align: center;
   }
   
   .feature:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     border-color: var(--primary-color);
   }
   
   .feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
   }
   
   .feature h3 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     color: var(--primary-color);
   }
   
   .feature p {
     color: var(--text-light);
     line-height: 1.6;
+    font-size: 0.95rem;
   }
   
   /* 章节标题 */
   .section-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: var(--primary-color);
     margin-bottom: 25px;
     border-bottom: 1px solid #eeeeee;
-    padding-bottom: 15px;
+    padding-bottom: 12px;
     position: relative;
   }
   
@@ -234,14 +235,14 @@ layout: default
     position: absolute;
     bottom: -1px;
     left: 0;
-    width: 60px;
+    width: 50px;
     height: 3px;
     background-color: var(--primary-color);
   }
   
   /* 最新文章部分 */
   .recent-posts {
-    margin-bottom: 80px;
+    margin-bottom: 60px;
   }
   
   .post-list {
@@ -251,8 +252,8 @@ layout: default
   }
   
   .post-item {
-    margin-bottom: 30px;
-    padding-bottom: 30px;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
     border-bottom: 1px solid #eeeeee;
   }
   
@@ -263,7 +264,7 @@ layout: default
   .post-meta {
     display: block;
     color: var(--text-light);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin-bottom: 8px;
   }
   
@@ -273,7 +274,7 @@ layout: default
   }
   
   .post-link {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: var(--primary-color);
     text-decoration: none;
     font-weight: 600;
@@ -288,46 +289,47 @@ layout: default
     color: var(--text-light);
     margin-bottom: 15px;
     line-height: 1.6;
+    font-size: 0.95rem;
   }
   
   .post-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
   }
   
   .post-category {
     background-color: rgba(252, 79, 55, 0.1);
     color: var(--primary-color);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
   }
   
   .post-tag-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
   }
   
   .post-tag {
     background-color: #f5f5f5;
     color: var(--text-color);
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.85rem;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 0.8rem;
   }
   
   .see-all {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 25px;
   }
   
   .see-all-link {
     color: var(--primary-color);
     font-weight: 500;
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 1rem;
     transition: all 0.3s;
   }
   
@@ -338,21 +340,21 @@ layout: default
   
   /* 热门主题部分 */
   .topics {
-    margin-bottom: 80px;
+    margin-bottom: 60px;
   }
   
   .topics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 15px;
   }
   
   .topic-card {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 15px;
     border: 1px solid #eeeeee;
-    border-radius: 5px;
+    border-radius: 4px;
     text-decoration: none;
     transition: all 0.3s;
     background-color: white;
@@ -361,18 +363,18 @@ layout: default
   
   .topic-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     border-color: var(--primary-color);
   }
   
   .topic-icon {
-    font-size: 1.8rem;
-    margin-right: 15px;
+    font-size: 1.5rem;
+    margin-right: 12px;
     color: var(--primary-color);
   }
   
   .topic-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
     color: var(--text-color);
     margin: 0;
@@ -380,31 +382,31 @@ layout: default
   }
   
   .topic-arrow {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--primary-color);
     opacity: 0;
     transition: all 0.3s;
     position: absolute;
-    right: 20px;
+    right: 15px;
   }
   
   .topic-card:hover .topic-arrow {
     opacity: 1;
-    transform: translateX(5px);
+    transform: translateX(3px);
   }
   
   /* 响应式设计 */
   @media (max-width: 768px) {
     .hero {
-      padding: 60px 20px;
+      padding: 40px 15px;
     }
     
     .hero-title {
-      font-size: 2.2rem;
+      font-size: 2rem;
     }
     
     .hero-description {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
     }
     
     .feature-container {
@@ -419,13 +421,17 @@ layout: default
     
     .btn-primary, .btn-secondary {
       width: 100%;
-      max-width: 300px;
+      max-width: 250px;
+    }
+    
+    .feature {
+      padding: 20px;
     }
   }
   
   @media (max-width: 480px) {
     .hero-title {
-      font-size: 1.8rem;
+      font-size: 1.7rem;
     }
     
     .hero-description {
@@ -438,7 +444,11 @@ layout: default
     }
     
     .section-title {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
+    }
+    
+    .post-link {
+      font-size: 1.1rem;
     }
   }
 </style>
