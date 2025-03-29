@@ -544,6 +544,8 @@ a {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
+  z-index: 1;
 }
 
 .code-header {
@@ -553,6 +555,7 @@ a {
   background: var(--dark-bg);
   color: #fff;
   padding: 10px 15px;
+  user-select: none;
 }
 
 .code-title {
@@ -560,6 +563,7 @@ a {
   font-weight: 600;
   margin: 0;
   color: #fff;
+  text-transform: lowercase;
 }
 
 .code-controls {
@@ -595,6 +599,7 @@ a {
   box-shadow: none;
   font-size: 0.9rem;
   line-height: 1.5;
+  tab-size: 2;
 }
 
 .code-body pre code {
@@ -603,6 +608,9 @@ a {
   padding: 0;
   border-radius: 0;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
 }
 
 .line-numbers {
@@ -646,8 +654,9 @@ a {
   padding: 5px 10px;
   font-size: 0.8rem;
   cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  z-index: 10;
 }
 
 .code-body:hover .copy-button {
@@ -656,4 +665,23 @@ a {
 
 .copy-button:hover {
   background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* 确保移动设备上的代码展示正常 */
+@media screen and (max-width: 767px) {
+  .code-body pre {
+    font-size: 0.8rem;
+    padding: 12px;
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+  
+  .copy-button {
+    opacity: 1;
+    top: 5px;
+    right: 5px;
+    padding: 3px 8px;
+    font-size: 0.7rem;
+  }
 } 
