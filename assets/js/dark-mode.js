@@ -3,6 +3,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
+  console.log("深色模式功能已加载");
   initDarkMode();
 });
 
@@ -13,8 +14,11 @@ function initDarkMode() {
   // 创建样式
   createDarkModeStyles();
   
-  // 创建切换按钮
-  createDarkModeToggle();
+  // 检查是否已存在切换按钮，避免重复创建
+  if (!document.querySelector('.dark-mode-toggle')) {
+    // 创建切换按钮
+    createDarkModeToggle();
+  }
   
   // 初始化模式
   setInitialMode();
@@ -27,6 +31,9 @@ function initDarkMode() {
  * 创建深色模式的CSS变量
  */
 function createDarkModeStyles() {
+  // 避免重复创建样式
+  if (document.getElementById('dark-mode-styles')) return;
+  
   const darkModeStyle = document.createElement('style');
   darkModeStyle.id = 'dark-mode-styles';
   darkModeStyle.textContent = `
@@ -133,6 +140,7 @@ function createDarkModeToggle() {
   
   // 添加到页面
   document.body.appendChild(darkModeToggle);
+  console.log("深色模式按钮已创建");
 }
 
 /**
@@ -141,6 +149,7 @@ function createDarkModeToggle() {
 function toggleDarkMode() {
   const isDarkMode = document.body.classList.toggle('dark-mode');
   localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+  console.log("深色模式状态：", isDarkMode ? "已启用" : "已禁用");
 }
 
 /**
@@ -149,18 +158,24 @@ function toggleDarkMode() {
 function setInitialMode() {
   // 检查本地存储中的偏好设置
   const savedMode = localStorage.getItem('darkMode');
+  console.log("从本地存储读取深色模式设置:", savedMode);
   
   if (savedMode === 'enabled') {
     // 用户之前选择了深色模式
     document.body.classList.add('dark-mode');
+    console.log("应用深色模式 (基于用户设置)");
   } else if (savedMode === 'disabled') {
     // 用户之前选择了浅色模式
     document.body.classList.remove('dark-mode');
+    console.log("应用浅色模式 (基于用户设置)");
   } else {
     // 根据系统偏好设置
     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (prefersDarkMode) {
       document.body.classList.add('dark-mode');
+      console.log("应用深色模式 (基于系统偏好)");
+    } else {
+      console.log("应用浅色模式 (基于系统偏好)");
     }
   }
 }
@@ -177,8 +192,10 @@ function listenForSystemThemeChanges() {
     if (!localStorage.getItem('darkMode')) {
       if (e.matches) {
         document.body.classList.add('dark-mode');
+        console.log("系统主题变化: 切换到深色模式");
       } else {
         document.body.classList.remove('dark-mode');
+        console.log("系统主题变化: 切换到浅色模式");
       }
     }
   });
