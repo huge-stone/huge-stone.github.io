@@ -28,7 +28,53 @@ function initCodeShowcase() {
   setTimeout(function() {
     console.log("处理代码块...");
     enhanceAllCodeBlocks();
-  }, 800); // 延长延迟确保highlight.js有足够时间处理代码
+    
+    // 在highlight.js处理后，再次应用我们的样式，确保样式不被覆盖
+    setTimeout(enforceStyles, 200);
+  }, 1000); // 延长延迟确保highlight.js有足够时间处理代码
+}
+
+/**
+ * 强制应用我们的样式，覆盖highlight.js的样式
+ */
+function enforceStyles() {
+  console.log("强制应用自定义样式...");
+  
+  // 查找所有代码展示区域
+  const showcases = document.querySelectorAll('.code-showcase');
+  showcases.forEach(function(showcase) {
+    // 找到代码区域
+    const codeBody = showcase.querySelector('.code-body');
+    if (codeBody) {
+      // 重新应用背景颜色
+      codeBody.style.backgroundColor = 'var(--dark-bg)';
+      
+      // 处理pre标签
+      const pre = codeBody.querySelector('pre');
+      if (pre) {
+        pre.style.backgroundColor = 'var(--dark-bg)';
+        pre.style.color = 'var(--code-text)';
+        
+        // 处理code标签
+        const code = pre.querySelector('code');
+        if (code) {
+          code.style.backgroundColor = 'var(--dark-bg)';
+          code.style.color = 'var(--code-text)';
+          
+          // 处理code内的所有span元素（highlight.js生成的）
+          const spans = code.querySelectorAll('span');
+          spans.forEach(function(span) {
+            // 提高高亮文本的可见性
+            if (span.className.includes('hljs-')) {
+              span.style.fontWeight = 'bold';
+            }
+          });
+        }
+      }
+    }
+  });
+  
+  console.log("样式强制应用完成");
 }
 
 /**
@@ -74,6 +120,7 @@ function enhanceAllCodeBlocks() {
       // 创建包装容器
       const wrapper = document.createElement('div');
       wrapper.className = 'code-showcase';
+      wrapper.setAttribute('data-language', language || 'plaintext');
       
       // 创建标题栏
       const header = document.createElement('div');
@@ -90,6 +137,7 @@ function enhanceAllCodeBlocks() {
       // 创建代码容器
       const codeBody = document.createElement('div');
       codeBody.className = 'code-body';
+      codeBody.style.backgroundColor = 'var(--dark-bg)';
       
       // 添加复制按钮
       const copyButton = document.createElement('button');
@@ -112,6 +160,14 @@ function enhanceAllCodeBlocks() {
       if (parent) {
         // 深度克隆pre元素以保留highlight.js的样式
         const preClone = pre.cloneNode(true);
+        preClone.style.backgroundColor = 'var(--dark-bg)';
+        
+        // 确保code元素的背景色是透明的
+        const codeClone = preClone.querySelector('code');
+        if (codeClone) {
+          codeClone.style.backgroundColor = 'transparent';
+          codeClone.style.color = 'var(--code-text)';
+        }
         
         // 构建新的结构
         wrapper.appendChild(header);
@@ -209,16 +265,17 @@ function addCustomStyles() {
   styleElement.textContent = `
     /* 复制按钮的额外样式 */
     .copy-success {
-      background: rgba(40, 167, 69, 0.2) !important;
+      background: rgba(40, 167, 69, 0.3) !important;
     }
     
     .copy-error {
-      background: rgba(220, 53, 69, 0.2) !important;
+      background: rgba(220, 53, 69, 0.3) !important;
     }
     
     /* 确保代码块内的文本可以选择 */
     .code-body pre, .code-body code {
       user-select: text;
+      background-color: var(--dark-bg) !important;
     }
     
     /* 确保复制按钮始终可见 */
@@ -234,6 +291,18 @@ function addCustomStyles() {
     /* 改进代码块内部样式 */
     .code-body pre {
       border-radius: 0 0 8px 8px !important;
+      background-color: var(--dark-bg) !important;
+    }
+    
+    /* 确保代码文本颜色 */
+    .code-body pre code {
+      color: var(--code-text) !important;
+      background-color: transparent !important;
+    }
+    
+    /* 确保span元素颜色正确 */
+    .code-body pre code span {
+      background-color: transparent !important;
     }
   `;
   

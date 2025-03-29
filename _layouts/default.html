@@ -19,13 +19,34 @@
     <script src="https://kit.fontawesome.com/3c3d338008.js" crossorigin="anonymous"></script>
     
     <!-- Highlight.js - 用于语法高亮 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/github-dark.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/vs2015.min.css">
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/highlight.min.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
+        // 配置highlight.js设置
+        hljs.configure({
+          cssSelector: 'pre code',
+          ignoreUnescapedHTML: true
+        });
+        
+        // 应用highlight.js
         document.querySelectorAll('pre code').forEach((block) => {
           hljs.highlightElement(block);
         });
+        
+        // 确保代码块样式正确
+        setTimeout(function() {
+          document.querySelectorAll('.code-body pre').forEach(pre => {
+            pre.style.backgroundColor = 'var(--dark-bg)';
+            pre.style.color = '#ffffff';
+            
+            const code = pre.querySelector('code');
+            if (code) {
+              code.style.backgroundColor = 'transparent';
+              code.style.color = '#ffffff';
+            }
+          });
+        }, 500);
       });
     </script>
     

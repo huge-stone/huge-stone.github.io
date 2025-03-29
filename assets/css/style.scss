@@ -4,7 +4,7 @@
 
 :root {
   --primary-color: #4caf50;
-  --dark-bg: #121a24;
+  --dark-bg: #0d1117; /* 使用更深的背景色 */
   --code-text: #ffffff;
 }
 /* 代码展示区域样式 */
@@ -12,7 +12,7 @@
   margin: 30px 0;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid #2c4058;
+  border: 1px solid #30363d;
   box-shadow: 0 4px 15px rgba(0,0,0,0.25);
 }
 .code-header {
@@ -29,22 +29,25 @@
 .dot-red { background-color: #ff5f56; }
 .dot-yellow { background-color: #ffbd2e; }
 .dot-green { background-color: #27c93f; }
-.code-body { position: relative; background-color: var(--dark-bg); }
+.code-body { position: relative; background-color: var(--dark-bg) !important; }
 .code-body pre { 
-  margin: 0; 
-  padding: 16px; 
-  background-color: var(--dark-bg); 
-  color: var(--code-text); 
+  margin: 0 !important; 
+  padding: 16px !important; 
+  background-color: var(--dark-bg) !important; 
+  color: var(--code-text) !important; 
   overflow-x: auto; 
   border-radius: 0 0 10px 10px;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  line-height: 1.6;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace !important;
+  line-height: 1.6 !important;
+  font-size: 14px !important;
 }
-.code-body pre code { 
-  background-color: transparent; 
-  color: var(--code-text);
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+.code-body pre code,
+.code-body pre code span { 
+  background-color: transparent !important; 
+  color: var(--code-text) !important;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace !important;
   text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+  font-size: 14px !important;
 }
 .copy-button { 
   position: absolute; 
@@ -67,40 +70,69 @@
 .copy-success { background: rgba(40,167,69,0.3) !important; }
 .copy-error { background: rgba(220,53,69,0.3) !important; }
 
-/* 确保代码在highlight.js处理后仍然保持正确的颜色 */
-.hljs {
+/* 强制覆盖highlight.js的样式 */
+.code-body pre,
+.code-body pre code,
+.code-body .hljs {
   background-color: var(--dark-bg) !important;
   color: var(--code-text) !important;
 }
 
 /* 高亮语法颜色 - 增强对比度 */
-.hljs-keyword, .hljs-selector-tag, .hljs-function { color: #ff79c6; }
-.hljs-string, .hljs-attr { color: #ffff80; }
-.hljs-title, .hljs-name { color: #50fa7b; }
-.hljs-comment { color: #8899bb; }
-.hljs-meta, .hljs-meta-keyword { color: #bd93f9; }
-.hljs-number, .hljs-literal { color: #bd93f9; }
-.hljs-built_in, .hljs-type { color: #8be9fd; }
-.hljs-class { color: #50fa7b; }
-.hljs-variable, .hljs-subst { color: #f8f8f2; }
-.hljs-symbol, .hljs-selector-id, .hljs-params { color: #f1fa8c; }
-.hljs-emphasis { font-style: italic; }
-.hljs-strong { font-weight: bold; }
+.code-showcase .hljs-keyword, 
+.code-showcase .hljs-selector-tag, 
+.code-showcase .hljs-function { color: #ff79c6 !important; }
 
-/* 修正特定语言的样式问题 */
-.language-python .hljs-comment { color: #8899bb; }
-.language-python .hljs-string { color: #ffff80; }
-.language-python .hljs-number { color: #bd93f9; }
-.language-python .hljs-built_in { color: #8be9fd; }
-.language-python .hljs-keyword { color: #ff79c6; }
-.language-python .hljs-class { color: #50fa7b; }
-.language-python .hljs-function { color: #50fa7b; }
-.language-python .hljs-decorator { color: #bd93f9; }
+.code-showcase .hljs-string, 
+.code-showcase .hljs-attr { color: #ffff80 !important; }
+
+.code-showcase .hljs-title, 
+.code-showcase .hljs-name { color: #50fa7b !important; }
+
+.code-showcase .hljs-comment { color: #8899bb !important; }
+
+.code-showcase .hljs-meta, 
+.code-showcase .hljs-meta-keyword { color: #bd93f9 !important; }
+
+.code-showcase .hljs-number, 
+.code-showcase .hljs-literal { color: #bd93f9 !important; }
+
+.code-showcase .hljs-built_in, 
+.code-showcase .hljs-type { color: #8be9fd !important; }
+
+.code-showcase .hljs-class { color: #50fa7b !important; }
+
+.code-showcase .hljs-variable, 
+.code-showcase .hljs-subst { color: #f8f8f2 !important; }
+
+.code-showcase .hljs-symbol, 
+.code-showcase .hljs-selector-id, 
+.code-showcase .hljs-params { color: #f1fa8c !important; }
+
+.code-showcase .hljs-emphasis { font-style: italic !important; }
+
+.code-showcase .hljs-strong { font-weight: bold !important; }
+
+/* 强制为特定语言应用样式 */
+.code-showcase .language-python .hljs-comment { color: #8899bb !important; }
+.code-showcase .language-python .hljs-string { color: #ffff80 !important; }
+.code-showcase .language-python .hljs-number { color: #bd93f9 !important; }
+.code-showcase .language-python .hljs-built_in { color: #8be9fd !important; }
+.code-showcase .language-python .hljs-keyword { color: #ff79c6 !important; }
+.code-showcase .language-python .hljs-class { color: #50fa7b !important; }
+.code-showcase .language-python .hljs-function { color: #50fa7b !important; }
+.code-showcase .language-python .hljs-decorator { color: #bd93f9 !important; }
+
+/* 修正任何其他可能的样式问题 */
+.code-showcase code.hljs {
+  padding: 0 !important;
+  background: var(--dark-bg) !important;
+}
 
 /* 响应式调整 */
 @media screen and (max-width: 767px) {
   .code-body pre {
-    padding: 12px;
-    font-size: 0.85rem;
+    padding: 12px !important;
+    font-size: 0.85rem !important;
   }
 }
