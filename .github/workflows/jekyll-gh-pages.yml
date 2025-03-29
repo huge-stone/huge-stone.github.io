@@ -23,18 +23,35 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
           bundler-cache: true
+      
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install
+      
+      - name: List environment
+        run: |
+          ruby -v
+          bundle -v
+          gem list jekyll
+          bundle exec jekyll -v
+      
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
-      - name: Build with Jekyll
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+      
+      - name: Build with Jekyll (verbose)
+        run: bundle exec jekyll build --verbose --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+        continue-on-error: false
+      
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
