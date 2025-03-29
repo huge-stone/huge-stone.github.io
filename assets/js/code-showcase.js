@@ -62,12 +62,12 @@ function enforceStyles() {
     // 设置代码体区域样式
     const codeBody = showcase.querySelector('.code-body');
     if (codeBody) {
-      codeBody.style.cssText = "background-color: #0d1117 !important; overflow-x: auto !important; margin: 0 !important;";
+      codeBody.style.cssText = "background-color: #1a1f29 !important; overflow-x: auto !important; margin: 0 !important;";
       
       // 设置pre标签样式
       const pre = codeBody.querySelector('pre');
       if (pre) {
-        pre.style.cssText = "background-color: #0d1117 !important; color: #ffffff !important; padding: 16px !important; margin: 0 !important; overflow-x: auto !important; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;";
+        pre.style.cssText = "background-color: #1a1f29 !important; color: #ffffff !important; padding: 16px !important; margin: 0 !important; overflow-x: auto !important; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;";
         
         // 设置code标签样式
         const code = pre.querySelector('code');
