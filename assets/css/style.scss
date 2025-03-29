@@ -511,4 +511,124 @@ a {
 
 .topic-card:hover .topic-arrow {
   transform: translateX(5px);
+}
+
+/* 代码展示区域增强 */
+.code-showcase {
+  margin: 30px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--dark-bg);
+  color: #fff;
+  padding: 10px 15px;
+}
+
+.code-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  color: #fff;
+}
+
+.code-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.code-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dot-red { background-color: #ff5f56; }
+.dot-yellow { background-color: #ffbd2e; }
+.dot-green { background-color: #27c93f; }
+
+.code-body {
+  position: relative;
+  background-color: var(--code-bg);
+  padding: 0;
+  margin: 0;
+  border-radius: 0 0 10px 10px;
+}
+
+.code-body pre {
+  margin: 0;
+  padding: 16px;
+  background-color: var(--dark-bg);
+  color: #f8f8f2;
+  overflow-x: auto;
+  border-radius: 0 0 10px 10px;
+  box-shadow: none;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.code-body pre code {
+  background: transparent;
+  color: #f8f8f2;
+  padding: 0;
+  border-radius: 0;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+.line-numbers {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  color: #606060;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  pointer-events: none;
+  user-select: none;
+}
+
+.code-body pre.with-line-numbers {
+  padding-left: 50px;
+}
+
+/* 语法高亮 */
+.code-keyword { color: #ff79c6; }
+.code-string { color: #f1fa8c; }
+.code-function { color: #50fa7b; }
+.code-comment { color: #6272a4; }
+.code-number { color: #bd93f9; }
+.code-operator { color: #ff79c6; }
+.code-variable { color: #f8f8f2; }
+.code-class { color: #8be9fd; font-style: italic; }
+.code-tag { color: #ff79c6; }
+.code-attr-name { color: #50fa7b; }
+.code-attr-value { color: #f1fa8c; }
+
+/* 复制按钮 */
+.copy-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.code-body:hover .copy-button {
+  opacity: 1;
+}
+
+.copy-button:hover {
+  background: rgba(255, 255, 255, 0.2);
 } 
