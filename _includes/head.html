@@ -56,5 +56,105 @@
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
     }
+    
+    /* 代码高亮样式 */
+    /* 代码展示区域样式 */
+    .code-showcase {
+      margin: 30px 0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #2d3748;
+      color: #fff;
+      padding: 10px 15px;
+    }
+    
+    .code-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin: 0;
+      color: #fff;
+    }
+    
+    .code-controls {
+      display: flex;
+      gap: 6px;
+    }
+    
+    .code-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    
+    .dot-red { background-color: #ff5f56; }
+    .dot-yellow { background-color: #ffbd2e; }
+    .dot-green { background-color: #27c93f; }
+    
+    .code-body {
+      position: relative;
+      background-color: #282a36;
+      padding: 0;
+      margin: 0;
+      border-radius: 0 0 10px 10px;
+    }
+    
+    pre {
+      margin: 0;
+      padding: 16px;
+      background-color: #282a36;
+      color: #f8f8f2;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      border-radius: 0 0 10px 10px;
+    }
+    
+    pre code {
+      background: transparent !important;
+      color: #f8f8f2;
+      padding: 0;
+      border-radius: 0;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+    
+    /* 语法高亮 */
+    .highlight .k, .code-keyword { color: #ff79c6; } /* 关键词 */
+    .highlight .s, .code-string { color: #f1fa8c; } /* 字符串 */
+    .highlight .nf, .code-function { color: #50fa7b; } /* 函数名 */
+    .highlight .c, .highlight .c1, .code-comment { color: #6272a4; } /* 注释 */
+    .highlight .m, .code-number { color: #bd93f9; } /* 数字 */
+    .highlight .o, .code-operator { color: #ff79c6; } /* 操作符 */
+    .highlight .n, .code-variable { color: #f8f8f2; } /* 变量名 */
+    .highlight .p { color: #f8f8f2; } /* 括号等 */
+    
+    /* 针对特定语言的高亮 */
+    .language-python .highlight .k { color: #ff79c6; }
+    .language-javascript .highlight .kd { color: #ff79c6; }
+    .language-html .highlight .nt { color: #ff79c6; }
+    
+    /* 复制按钮 */
+    .copy-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #fff;
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    
+    .copy-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
   </style>
 </head> 
