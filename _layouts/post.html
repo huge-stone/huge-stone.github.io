@@ -84,10 +84,12 @@ layout: default
   </div>
 
   <!-- 评论区 -->
+  {% if site.disqus.shortname %}
   <div class="comments-section">
     <h3>评论</h3>
     {%- include disqus_comments.html -%}
   </div>
+  {% endif %}
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>

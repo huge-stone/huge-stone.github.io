@@ -67,8 +67,9 @@ exclude:
   - vendor/ruby/
 
 # 添加Disqus评论系统配置
-disqus:
-  shortname: huge-stone-blog # 替换为您在Disqus上注册的shortname
+# 如果您没有注册Disqus或不需要评论功能，请删除或注释掉以下内容
+# disqus:
+#   shortname: huge-stone-blog # 替换为您在Disqus上注册的shortname
 
 # 添加Google Analytics配置
 google_analytics: G-XXXXXXXXXX # 替换为您的Google Analytics跟踪ID
