@@ -49,6 +49,7 @@ header_pages:
   - _pages/projects.md
   - _pages/resources.md
   - _pages/code-showcase.md
+  - _pages/code-example.md
   - _pages/search.md
 
 # 排除不需要的文件

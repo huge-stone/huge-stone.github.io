@@ -4,11 +4,16 @@
  */
 
 document.addEventListener('DOMContentLoaded', function() {
-  // 初始化所有代码展示区
-  initCodeShowcases();
+  console.log("代码展示功能已加载");
   
-  // 添加复制按钮功能
-  initCopyButtons();
+  // 立即对所有pre元素应用样式增强
+  enhanceCodeBlocks();
+  
+  // 初始化所有代码展示区
+  setTimeout(function() {
+    initCodeShowcases();
+    initCopyButtons();
+  }, 500);
 });
 
 /**
@@ -160,7 +165,4 @@ function enhanceCodeBlocks() {
     initCodeShowcases();
     initCopyButtons();
   });
-}
-
-// 在页面加载后增强代码块
-document.addEventListener('DOMContentLoaded', enhanceCodeBlocks); 
+} 
