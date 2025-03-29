@@ -28,12 +28,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler-cache: true
+          bundler-cache: false
       
-      - name: Install dependencies
+      - name: Install compatible bundler
         run: |
-          gem install bundler
-          bundle install
+          gem install bundler -v '~> 2.4'
+          bundle update --bundler
       
       - name: List environment
         run: |
