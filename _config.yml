@@ -25,6 +25,8 @@ description: >- # this means to ignore newlines until "baseurl:"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://huge-stone.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 author: AGI SEEKING Team # 添加作者信息
+lang: zh-CN # 指定网站语言
+encoding: UTF-8 # 确保编码一致
 twitter_username: 
 github_username: huge-stone
 linkedin_username:
