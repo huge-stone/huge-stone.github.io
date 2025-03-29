@@ -12,23 +12,23 @@ layout: default
 
   <section class="features">
     <div class="feature-container">
-      <div class="feature">
+      <a href="/tutorials/#模型原理" class="feature">
         <div class="feature-icon">🧠</div>
         <h3>模型原理</h3>
         <p>深入理解大型语言模型和多模态模型的底层原理与技术架构</p>
-      </div>
+      </a>
       
-      <div class="feature">
+      <a href="/tutorials/#AGI探索" class="feature">
         <div class="feature-icon">🚀</div>
         <h3>AGI探索</h3>
         <p>追踪通用人工智能研究进展与前沿技术突破</p>
-      </div>
+      </a>
       
-      <div class="feature">
+      <a href="/tutorials/#实战案例" class="feature">
         <div class="feature-icon">💡</div>
         <h3>实战案例</h3>
         <p>分享AI应用开发与落地实践的经验与最佳实践</p>
-      </div>
+      </a>
     </div>
   </section>
 
@@ -108,8 +108,10 @@ layout: default
     padding: 60px 0;
     text-align: center;
     margin-bottom: 50px;
-    background-color: #f8f9fa;
-    border-radius: 4px;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
   }
   
   .hero-title {
@@ -128,50 +130,6 @@ layout: default
     line-height: 1.5;
   }
   
-  .hero-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-  
-  .btn-primary {
-    display: inline-block;
-    padding: 10px 24px;
-    background-color: var(--primary-color);
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: 500;
-    font-size: 1rem;
-    transition: all 0.3s;
-  }
-  
-  .btn-primary:hover {
-    background-color: darken(var(--primary-color), 10%);
-    transform: translateY(-2px);
-    color: white;
-    text-decoration: none;
-  }
-  
-  .btn-secondary {
-    display: inline-block;
-    padding: 10px 24px;
-    background-color: transparent;
-    color: var(--primary-color);
-    text-decoration: none;
-    border: 1px solid var(--primary-color);
-    border-radius: 4px;
-    font-weight: 500;
-    font-size: 1rem;
-    transition: all 0.3s;
-  }
-  
-  .btn-secondary:hover {
-    background-color: rgba(252, 79, 55, 0.05);
-    color: var(--primary-color);
-    text-decoration: none;
-  }
-  
   /* 特性区域 */
   .features {
     margin-bottom: 60px;
@@ -185,16 +143,21 @@ layout: default
   
   .feature {
     padding: 25px;
-    border: 1px solid #eeeeee;
-    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
     transition: all 0.3s;
     text-align: center;
+    text-decoration: none;
+    color: var(--text-color);
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
   }
   
   .feature:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--hover-shadow);
     border-color: var(--primary-color);
+    text-decoration: none;
   }
   
   .feature-icon {
@@ -221,7 +184,7 @@ layout: default
     font-weight: 600;
     color: var(--primary-color);
     margin-bottom: 25px;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 12px;
     position: relative;
   }
@@ -248,153 +211,163 @@ layout: default
   }
   
   .post-item {
-    margin-bottom: 25px;
-    padding-bottom: 25px;
-    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.3s;
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
   }
   
-  .post-item:last-child {
-    border-bottom: none;
+  .post-item:hover {
+    box-shadow: var(--hover-shadow);
+    border-color: var(--primary-color);
+    transform: translateY(-3px);
   }
   
   .post-meta {
+    font-size: 0.9rem;
+    color: #777;
     display: block;
-    color: var(--text-light);
-    font-size: 0.85rem;
     margin-bottom: 8px;
   }
   
   .post-title {
     margin-top: 0;
     margin-bottom: 10px;
+    font-size: 1.3rem;
   }
   
   .post-link {
-    font-size: 1.2rem;
+    font-weight: 600;
     color: var(--primary-color);
     text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s;
   }
   
   .post-link:hover {
+    text-decoration: none;
     color: darken(var(--primary-color), 10%);
   }
   
   .post-excerpt {
     color: var(--text-light);
-    margin-bottom: 15px;
-    line-height: 1.6;
     font-size: 0.95rem;
+    margin-bottom: 10px;
+    line-height: 1.6;
   }
   
   .post-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    margin-top: 10px;
   }
   
   .post-category {
-    background-color: rgba(252, 79, 55, 0.1);
-    color: var(--primary-color);
-    padding: 3px 10px;
-    border-radius: 15px;
+    background-color: #e1f5fe;
+    color: #0288d1;
+    padding: 3px 8px;
+    border-radius: 4px;
     font-size: 0.8rem;
-  }
-  
-  .post-tag-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
   }
   
   .post-tag {
-    background-color: #f5f5f5;
-    color: var(--text-color);
-    padding: 3px 10px;
-    border-radius: 15px;
+    background-color: #e8f5e9;
+    color: #388e3c;
+    padding: 3px 8px;
+    border-radius: 4px;
     font-size: 0.8rem;
+    margin-right: 5px;
   }
   
   .see-all {
     text-align: center;
-    margin-top: 25px;
+    margin-top: 30px;
   }
   
   .see-all-link {
+    display: inline-block;
+    padding: 8px 20px;
+    background-color: var(--light-bg);
     color: var(--primary-color);
-    font-weight: 500;
     text-decoration: none;
-    font-size: 1rem;
+    border-radius: 4px;
+    font-weight: 500;
     transition: all 0.3s;
   }
   
   .see-all-link:hover {
-    color: darken(var(--primary-color), 10%);
-    text-decoration: underline;
+    background-color: var(--primary-color);
+    color: white;
+    text-decoration: none;
   }
   
-  /* 热门主题部分 */
+  /* 热门主题区域 */
   .topics {
     margin-bottom: 60px;
   }
   
   .topics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
   }
   
   .topic-card {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 15px;
-    border: 1px solid #eeeeee;
-    border-radius: 4px;
+    padding: 25px 20px;
+    background-color: var(--card-bg);
+    border-radius: 8px;
     text-decoration: none;
     transition: all 0.3s;
-    background-color: white;
-    position: relative;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border-color);
   }
   
   .topic-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+    text-decoration: none;
     border-color: var(--primary-color);
   }
   
   .topic-icon {
-    font-size: 1.5rem;
-    margin-right: 12px;
-    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 15px;
   }
   
   .topic-title {
-    font-size: 1rem;
-    font-weight: 500;
     color: var(--text-color);
-    margin: 0;
-    flex-grow: 1;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    text-align: center;
   }
   
   .topic-arrow {
-    font-size: 1.1rem;
+    margin-top: 5px;
     color: var(--primary-color);
-    opacity: 0;
-    transition: all 0.3s;
-    position: absolute;
-    right: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: transform 0.3s;
   }
   
   .topic-card:hover .topic-arrow {
-    opacity: 1;
-    transform: translateX(3px);
+    transform: translateX(5px);
   }
   
-  /* 响应式设计 */
-  @media (max-width: 768px) {
+  /* 响应式调整 */
+  @media screen and (max-width: 768px) {
+    .home {
+      padding: 0 15px;
+    }
+    
     .hero {
-      padding: 40px 15px;
+      padding: 40px 20px;
+      margin-bottom: 30px;
     }
     
     .hero-title {
@@ -409,42 +382,12 @@ layout: default
       grid-template-columns: 1fr;
     }
     
-    .hero-buttons {
-      flex-direction: column;
-      gap: 15px;
-      align-items: center;
-    }
-    
-    .btn-primary, .btn-secondary {
-      width: 100%;
-      max-width: 250px;
-    }
-    
-    .feature {
-      padding: 20px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .hero-title {
-      font-size: 1.7rem;
-    }
-    
-    .hero-description {
-      font-size: 1rem;
-    }
-    
-    .post-tags {
-      flex-direction: column;
-      align-items: flex-start;
+    .topics-grid {
+      grid-template-columns: 1fr;
     }
     
     .section-title {
       font-size: 1.3rem;
-    }
-    
-    .post-link {
-      font-size: 1.1rem;
     }
   }
 </style>

@@ -9,9 +9,7 @@
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
         <label for="nav-trigger">
           <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
-            </svg>
+            <span class="menu-text">菜单</span>
           </span>
         </label>
 
@@ -48,7 +46,8 @@
   
   .site-title:hover {
     text-decoration: none;
-    color: #d44023 !important;
+    color: var(--primary-color) !important;
+    opacity: 0.85;
   }
   
   .site-nav {
@@ -95,15 +94,31 @@
   }
   
   .menu-icon {
-    width: 36px;
+    width: auto;
     height: 26px;
     line-height: 0;
     padding-top: 10px;
     text-align: center;
   }
   
-  .menu-icon > svg path {
-    fill: var(--text-color);
+  .menu-text {
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  @media screen and (min-width: 601px) {
+    .menu-icon {
+      display: none;
+    }
+    
+    .nav-trigger {
+      display: none;
+    }
+    
+    .site-nav .trigger {
+      display: block !important;
+    }
   }
   
   @media screen and (max-width: 600px) {
@@ -118,12 +133,42 @@
       z-index: 10;
     }
     
+    .site-nav .nav-trigger {
+      display: none;
+    }
+    
+    .site-nav .menu-icon {
+      display: block;
+      float: right;
+      width: auto;
+      text-align: center;
+      line-height: 0;
+      padding: 10px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    
+    .site-nav .trigger {
+      clear: both;
+      display: none;
+      padding-bottom: 5px;
+    }
+    
+    .site-nav:hover .trigger,
+    .site-nav .nav-trigger:checked ~ .trigger {
+      display: block;
+    }
+    
     .site-nav .page-link {
       display: block;
-      padding: 5px 10px;
-      margin-left: 20px;
-      margin-right: 20px;
-      text-align: left;
+      padding: 8px 15px;
+      margin: 0;
+      line-height: 1.5;
+      border-bottom: 1px solid #f1f1f1;
+    }
+    
+    .site-nav .page-link:last-child {
+      border-bottom: none;
     }
     
     .site-nav .page-link-highlight:after {
