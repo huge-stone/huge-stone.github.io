@@ -1,12 +1,14 @@
 /**
- * 代码展示功能 - 简化版
+ * 代码展示功能 - 改进版
  */
 
 document.addEventListener('DOMContentLoaded', function() {
   console.log("代码展示功能已加载");
   
   // 处理页面上所有代码块
-  enhanceAllCodeBlocks();
+  setTimeout(function() {
+    enhanceAllCodeBlocks();
+  }, 300); // 延迟300ms，确保所有DOM已经加载完成
 });
 
 /**
@@ -15,13 +17,24 @@ document.addEventListener('DOMContentLoaded', function() {
 function enhanceAllCodeBlocks() {
   // 查找所有代码块
   const codeBlocks = document.querySelectorAll('pre code');
+  console.log("找到代码块数量:", codeBlocks.length);
   
-  codeBlocks.forEach(function(codeElement) {
+  if (codeBlocks.length === 0) {
+    console.log("未找到代码块，将在1秒后重试");
+    setTimeout(enhanceAllCodeBlocks, 1000); // 如果没有找到，1秒后重试
+    return;
+  }
+  
+  codeBlocks.forEach(function(codeElement, index) {
     const pre = codeElement.parentNode;
-    if (pre.classList.contains('enhanced')) return;
     
-    // 标记为已处理
-    pre.classList.add('enhanced');
+    // 跳过已处理的代码块
+    if (pre.parentNode && pre.parentNode.classList && pre.parentNode.classList.contains('code-body')) {
+      console.log("跳过已处理的代码块");
+      return;
+    }
+    
+    console.log("处理代码块", index);
     
     // 获取语言信息
     let language = '';
@@ -54,36 +67,95 @@ function enhanceAllCodeBlocks() {
     const copyButton = document.createElement('button');
     copyButton.className = 'copy-button';
     copyButton.textContent = '复制';
-    copyButton.onclick = function() {
+    copyButton.onclick = function(e) {
+      e.preventDefault(); // 防止页面滚动
+      e.stopPropagation(); // 阻止事件冒泡
+      
       const text = codeElement.textContent;
       
-      // 使用临时textarea元素复制文本（兼容性更好）
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      textarea.style.position = 'fixed';  // 防止页面滚动
-      document.body.appendChild(textarea);
-      textarea.select();
-      
-      try {
-        document.execCommand('copy');
-        copyButton.textContent = '已复制!';
-        setTimeout(function() {
-          copyButton.textContent = '复制';
-        }, 2000);
-      } catch (err) {
-        console.error('复制失败:', err);
-        copyButton.textContent = '复制失败';
+      // 使用现代剪贴板API复制文本
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text)
+          .then(function() {
+            copyButton.textContent = '已复制!';
+            setTimeout(function() {
+              copyButton.textContent = '复制';
+            }, 2000);
+          })
+          .catch(function(err) {
+            console.error('复制失败 (Clipboard API):', err);
+            fallbackCopy();
+          });
+      } else {
+        fallbackCopy();
       }
       
-      document.body.removeChild(textarea);
+      // 回退复制方法
+      function fallbackCopy() {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        
+        try {
+          const successful = document.execCommand('copy');
+          copyButton.textContent = successful ? '已复制!' : '复制失败';
+          setTimeout(function() {
+            copyButton.textContent = '复制';
+          }, 2000);
+        } catch (err) {
+          console.error('复制失败 (execCommand):', err);
+          copyButton.textContent = '复制失败';
+        }
+        
+        document.body.removeChild(textarea);
+      }
+      
+      return false;
     };
     
-    // 重组DOM结构
-    const parent = pre.parentNode;
-    parent.insertBefore(wrapper, pre);
-    codeBody.appendChild(pre);
-    codeBody.appendChild(copyButton);
-    wrapper.appendChild(header);
-    wrapper.appendChild(codeBody);
+    try {
+      // 重组DOM结构
+      const parent = pre.parentNode;
+      wrapper.appendChild(header);
+      
+      // 从原位置移除pre
+      if (parent) {
+        parent.replaceChild(wrapper, pre);
+      }
+      
+      codeBody.appendChild(pre);
+      codeBody.appendChild(copyButton);
+      wrapper.appendChild(codeBody);
+      
+      console.log("代码块", index, "处理完成");
+    } catch (err) {
+      console.error("处理代码块时出错:", err);
+    }
   });
+  
+  console.log("所有代码块处理完成");
+}
+
+// 添加自定义样式（如果需要的话）
+function addCustomStyles() {
+  if (document.getElementById('code-showcase-styles')) return;
+  
+  const styleElement = document.createElement('style');
+  styleElement.id = 'code-showcase-styles';
+  styleElement.textContent = `
+    /* 代码展示区域样式 */
+    .code-showcase {
+      margin: 30px 0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* 样式内容已包含在主CSS中，这里仅作为备份 */
+  `;
+  
+  document.head.appendChild(styleElement);
 } 
