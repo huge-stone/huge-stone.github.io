@@ -1,40 +1,23 @@
 @import "minima";
 
-/* 全局色彩变量 - 参考Jekyll官网风格 */
+/* 全局色彩变量 - 淡绿色主题 */
 :root {
-  --primary-color: #fc4d35; /* Jekyll红色 */
-  --secondary-color: #333333;
-  --accent-color: #fc4d35;
-  --gradient-start: #fafafa;
-  --gradient-end: #f5f5f5;
-  --text-color: #333333;
-  --text-light: #666666;
-  --light-bg: #f8f9fa;
-  --dark-bg: #333333;
-  --border-color: #e9ecef;
-  --card-bg: white;
-  --card-shadow: 0 2px 8px rgba(0,0,0,0.04);
-  --hover-shadow: 0 4px 12px rgba(0,0,0,0.07);
-}
-
-/* 全局色彩变量 - 现代柔和配色 */
-:root {
-  --primary-color: #fc4d35; /* 保留特色红色 */
+  --primary-color: #4caf50; /* 绿色主色调 */
   --secondary-color: #2c3e50;
-  --accent-color: #3498db;
-  --gradient-start: #f9f7f7;
-  --gradient-end: #edf2f7;
+  --accent-color: #66bb6a;
+  --gradient-start: #f5f8f5;
+  --gradient-end: #edf5ed;
   --text-color: #2d3748;
-  --text-light: #718096;
-  --light-bg: #f7fafc;
+  --text-light: #5a6578;
+  --light-bg: #edf5ed;
   --dark-bg: #2d3748;
-  --border-color: #e2e8f0;
+  --border-color: #dce8dc;
   --card-bg: #ffffff;
-  --background-color: #f5f7fa;
+  --background-color: #f0f5f0; /* 淡绿色背景 */
   --card-shadow: 0 2px 10px rgba(0,0,0,0.05);
   --hover-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  --footer-bg: #edf2f7;
-  --code-bg: #f1f5f9;
+  --footer-bg: #e8f1e8;
+  --code-bg: #f1f5f1;
 }
 
 /* 全局样式 */

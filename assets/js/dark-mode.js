@@ -35,9 +35,9 @@ function createDarkModeStyles() {
     }
     
     body.dark-mode {
-      --primary-color: #ff6b4a;
-      --secondary-color: #8ab4f8;
-      --accent-color: #bb86fc;
+      --primary-color: #6abf6e;
+      --secondary-color: #81c784;
+      --accent-color: #a5d6a7;
       --gradient-start: #1a1a1a;
       --gradient-end: #2d2d2d;
       --text-color: #e0e0e0;
