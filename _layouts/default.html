@@ -19,11 +19,13 @@
     <script src="https://kit.fontawesome.com/3c3d338008.js" crossorigin="anonymous"></script>
     
     <!-- Highlight.js - 用于语法高亮 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/vs2015.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/dracula.min.css">
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/highlight.min.js"></script>
+    
+    <!-- 代码展示增强脚本 -->
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        // 配置highlight.js设置
+        // 配置highlight.js
         hljs.configure({
           cssSelector: 'pre code',
           ignoreUnescapedHTML: true
@@ -34,19 +36,52 @@
           hljs.highlightElement(block);
         });
         
-        // 确保代码块样式正确
-        setTimeout(function() {
+        // 确保代码块样式正确 - 初始应用
+        fixCodeStyles();
+        
+        // 页面完全加载后再次应用
+        window.addEventListener('load', function() {
+          setTimeout(fixCodeStyles, 100);
+          // 定期检查确保样式正确
+          setInterval(fixCodeStyles, 1000);
+        });
+        
+        // 修复所有代码展示区域的样式
+        function fixCodeStyles() {
           document.querySelectorAll('.code-body pre').forEach(pre => {
-            pre.style.backgroundColor = 'var(--dark-bg)';
-            pre.style.color = '#ffffff';
+            pre.style.cssText = "background-color: #0d1117 !important; color: #ffffff !important; padding: 16px !important;";
             
             const code = pre.querySelector('code');
             if (code) {
-              code.style.backgroundColor = 'transparent';
-              code.style.color = '#ffffff';
+              code.style.cssText = "background-color: transparent !important; color: #ffffff !important;";
+              
+              // 特别处理Python代码
+              if (code.classList.contains('language-python')) {
+                // 处理所有关键字、字符串等
+                const spans = code.querySelectorAll('span');
+                spans.forEach(span => {
+                  if (span.className.includes('hljs-keyword')) {
+                    span.style.cssText = "color: #ff79c6 !important; font-weight: bold !important;";
+                  } else if (span.className.includes('hljs-string')) {
+                    span.style.cssText = "color: #f1fa8c !important;";
+                  } else if (span.className.includes('hljs-number')) {
+                    span.style.cssText = "color: #bd93f9 !important;";
+                  } else if (span.className.includes('hljs-comment')) {
+                    span.style.cssText = "color: #8899bb !important; font-style: italic !important;";
+                  } else if (span.className.includes('hljs-title') || span.className.includes('hljs-function')) {
+                    span.style.cssText = "color: #50fa7b !important; font-weight: bold !important;";
+                  } else if (span.className.includes('hljs-built_in')) {
+                    span.style.cssText = "color: #8be9fd !important; font-weight: bold !important;";
+                  } else {
+                    span.style.cssText = "color: #f8f8f2 !important;";
+                  }
+                });
+              }
             }
           });
-        }, 500);
+          
+          console.log("已应用代码样式修复");
+        }
       });
     </script>
     

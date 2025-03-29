@@ -1,310 +1,234 @@
 /**
- * 代码展示功能 - 改进版
+ * 代码展示功能
+ * 此脚本增强了代码块的展示效果，添加了行号和复制功能
  */
 
-// 等待页面和highlight.js完全加载
+// 等待页面加载完成
 document.addEventListener('DOMContentLoaded', function() {
-  console.log("DOM加载完成，等待页面资源加载");
-  
-  // 确保所有资源都加载完毕再运行代码
-  if (document.readyState === 'complete') {
-    initCodeShowcase();
-  } else {
-    window.addEventListener('load', function() {
-      console.log("页面完全加载，初始化代码展示功能");
-      initCodeShowcase();
-    });
-  }
+  // 初始化代码展示功能
+  setTimeout(initCodeShowcase, 300);
 });
 
-/**
- * 初始化代码展示功能
- */
+// 初始化代码展示功能
 function initCodeShowcase() {
-  // 添加自定义样式（确保样式先加载）
-  addCustomStyles();
-  
-  // 确保highlight.js已经处理了代码块
-  setTimeout(function() {
-    console.log("处理代码块...");
-    enhanceAllCodeBlocks();
-    
-    // 在highlight.js处理后，再次应用我们的样式，确保样式不被覆盖
-    setTimeout(enforceStyles, 200);
-  }, 1000); // 延长延迟确保highlight.js有足够时间处理代码
+  // 确保highlight.js已经应用
+  if (typeof hljs !== 'undefined') {
+    console.log('初始化代码展示功能');
+    try {
+      // 增强所有代码块
+      enhanceAllCodeBlocks();
+      
+      // 注册复制按钮事件监听器
+      document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('copy-btn') || 
+            event.target.parentElement.classList.contains('copy-btn')) {
+          const btn = event.target.classList.contains('copy-btn') ? 
+                      event.target : event.target.parentElement;
+          const codeBlock = btn.closest('.code-showcase').querySelector('pre code');
+          
+          if (codeBlock) {
+            copyTextToClipboard(codeBlock.textContent, btn);
+          }
+        }
+      });
+      
+      // 确保样式正确应用
+      setTimeout(enforceStyles, 200);
+    } catch (error) {
+      console.error('代码展示功能初始化错误:', error);
+    }
+  } else {
+    console.warn('highlight.js未加载，等待加载完成');
+    // 如果highlight.js还未加载，再次尝试
+    setTimeout(initCodeShowcase, 300);
+  }
 }
 
-/**
- * 强制应用我们的样式，覆盖highlight.js的样式
- */
+// 确保样式正确应用
 function enforceStyles() {
-  console.log("强制应用自定义样式...");
+  console.log('强制应用自定义样式');
   
-  // 查找所有代码展示区域
-  const showcases = document.querySelectorAll('.code-showcase');
-  showcases.forEach(function(showcase) {
-    // 找到代码区域
+  // 对所有代码展示区应用样式
+  document.querySelectorAll('.code-showcase').forEach(showcase => {
+    // 设置展示区容器样式
+    showcase.style.cssText = "border: 1px solid #30363d !important; border-radius: 6px !important; overflow: hidden !important; margin: 1.5em 0 !important;";
+    
+    // 设置代码头部样式
+    const header = showcase.querySelector('.code-header');
+    if (header) {
+      header.style.cssText = "background-color: #161b22 !important; border-bottom: 1px solid #30363d !important; padding: 8px 16px !important; color: #c9d1d9 !important;";
+    }
+    
+    // 设置代码体区域样式
     const codeBody = showcase.querySelector('.code-body');
     if (codeBody) {
-      // 重新应用背景颜色
-      codeBody.style.backgroundColor = 'var(--dark-bg)';
+      codeBody.style.cssText = "background-color: #0d1117 !important; overflow-x: auto !important; margin: 0 !important;";
       
-      // 处理pre标签
+      // 设置pre标签样式
       const pre = codeBody.querySelector('pre');
       if (pre) {
-        pre.style.backgroundColor = 'var(--dark-bg)';
-        pre.style.color = 'var(--code-text)';
+        pre.style.cssText = "background-color: #0d1117 !important; color: #ffffff !important; padding: 16px !important; margin: 0 !important; overflow-x: auto !important; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important;";
         
-        // 处理code标签
+        // 设置code标签样式
         const code = pre.querySelector('code');
         if (code) {
-          code.style.backgroundColor = 'var(--dark-bg)';
-          code.style.color = 'var(--code-text)';
+          code.style.cssText = "background-color: transparent !important; color: #ffffff !important; font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace !important; padding: 0 !important;";
           
-          // 处理code内的所有span元素（highlight.js生成的）
-          const spans = code.querySelectorAll('span');
-          spans.forEach(function(span) {
-            // 提高高亮文本的可见性
-            if (span.className.includes('hljs-')) {
-              span.style.fontWeight = 'bold';
-            }
+          // 处理代码高亮元素
+          code.querySelectorAll('span').forEach(span => {
+            applyHighlightStyle(span);
           });
         }
       }
     }
   });
-  
-  console.log("样式强制应用完成");
 }
 
-/**
- * 增强所有代码块
- */
+// 应用高亮样式到元素
+function applyHighlightStyle(span) {
+  // 根据类名应用不同的样式
+  if (span.className.includes('hljs-keyword')) {
+    span.style.cssText = "color: #ff79c6 !important; font-weight: bold !important;";
+  } else if (span.className.includes('hljs-string')) {
+    span.style.cssText = "color: #f1fa8c !important;";
+  } else if (span.className.includes('hljs-number')) {
+    span.style.cssText = "color: #bd93f9 !important;";
+  } else if (span.className.includes('hljs-comment')) {
+    span.style.cssText = "color: #8899bb !important; font-style: italic !important;";
+  } else if (span.className.includes('hljs-title') || span.className.includes('hljs-function')) {
+    span.style.cssText = "color: #50fa7b !important; font-weight: bold !important;";
+  } else if (span.className.includes('hljs-built_in')) {
+    span.style.cssText = "color: #8be9fd !important; font-weight: bold !important;";
+  } else {
+    span.style.cssText = "color: #f8f8f2 !important;";
+  }
+}
+
+// 增强所有代码块
 function enhanceAllCodeBlocks() {
   // 查找所有代码块
-  const preElements = document.querySelectorAll('pre');
-  console.log("找到pre元素数量:", preElements.length);
+  const codeBlocks = document.querySelectorAll('pre code');
+  console.log(`找到 ${codeBlocks.length} 个代码块`);
   
-  if (preElements.length === 0) {
-    console.log("未找到pre元素，将在1秒后重试");
-    setTimeout(enhanceAllCodeBlocks, 1000); // 如果没有找到，1秒后重试
-    return;
-  }
-  
-  let processedCount = 0;
-  
-  preElements.forEach(function(pre, index) {
+  codeBlocks.forEach(function(codeBlock, index) {
+    // 如果代码块已经被处理过，跳过
+    if (codeBlock.closest('.code-showcase')) {
+      return;
+    }
+    
     try {
-      // 跳过已处理的代码块
-      if (pre.parentNode && pre.parentNode.classList && pre.parentNode.classList.contains('code-body')) {
-        console.log(`跳过已处理的pre元素 #${index}`);
-        return;
-      }
+      const pre = codeBlock.parentNode;
+      if (!pre) return;
       
-      const codeElement = pre.querySelector('code');
-      if (!codeElement) {
-        console.log(`pre元素 #${index} 没有code子元素，跳过`);
-        return;
-      }
+      // 创建代码展示容器
+      const showcase = document.createElement('div');
+      showcase.className = 'code-showcase';
+      showcase.id = `code-showcase-${index}`;
       
-      console.log(`处理代码块 #${index}`);
-      
-      // 获取语言信息
-      let language = '';
-      if (codeElement.className) {
-        // 尝试从highlight.js的类中提取语言
-        const hlMatch = codeElement.className.match(/language-(\w+)/) || codeElement.className.match(/hljs (\w+)/);
-        if (hlMatch) language = hlMatch[1];
-      }
-      
-      // 创建包装容器
-      const wrapper = document.createElement('div');
-      wrapper.className = 'code-showcase';
-      wrapper.setAttribute('data-language', language || 'plaintext');
-      
-      // 创建标题栏
+      // 创建代码头部
       const header = document.createElement('div');
       header.className = 'code-header';
-      header.innerHTML = `
-        <div class="code-title">${language || '代码'}</div>
-        <div class="code-controls">
-          <div class="code-dot dot-red"></div>
-          <div class="code-dot dot-yellow"></div>
-          <div class="code-dot dot-green"></div>
-        </div>
-      `;
       
-      // 创建代码容器
-      const codeBody = document.createElement('div');
-      codeBody.className = 'code-body';
-      codeBody.style.backgroundColor = 'var(--dark-bg)';
+      // 识别语言类型
+      let language = '';
+      codeBlock.className.split(' ').forEach(className => {
+        if (className.startsWith('language-')) {
+          language = className.replace('language-', '');
+        }
+      });
+      
+      // 设置语言标签
+      const langTag = document.createElement('span');
+      langTag.className = 'code-lang';
+      langTag.textContent = language || 'text';
+      header.appendChild(langTag);
+      
+      // 创建控制按钮容器
+      const controls = document.createElement('div');
+      controls.className = 'code-controls';
       
       // 添加复制按钮
-      const copyButton = document.createElement('button');
-      copyButton.className = 'copy-button';
-      copyButton.textContent = '复制';
-      copyButton.addEventListener('click', function(e) {
-        e.preventDefault(); // 防止页面滚动
-        e.stopPropagation(); // 阻止事件冒泡
-        
-        const text = codeElement.textContent;
-        copyTextToClipboard(text, copyButton);
-        
-        return false;
-      });
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'copy-btn';
+      copyBtn.title = '复制代码';
+      copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+      controls.appendChild(copyBtn);
       
-      // 重组DOM结构
-      const parent = pre.parentNode;
+      // 添加控制按钮到头部
+      header.appendChild(controls);
       
-      // 只有当父元素存在时才进行替换
-      if (parent) {
-        // 深度克隆pre元素以保留highlight.js的样式
-        const preClone = pre.cloneNode(true);
-        preClone.style.backgroundColor = 'var(--dark-bg)';
-        
-        // 确保code元素的背景色是透明的
-        const codeClone = preClone.querySelector('code');
-        if (codeClone) {
-          codeClone.style.backgroundColor = 'transparent';
-          codeClone.style.color = 'var(--code-text)';
-        }
-        
-        // 构建新的结构
-        wrapper.appendChild(header);
-        codeBody.appendChild(preClone);
-        codeBody.appendChild(copyButton);
-        wrapper.appendChild(codeBody);
-        
-        // 替换原始元素
-        parent.replaceChild(wrapper, pre);
-        processedCount++;
-        
-        console.log(`代码块 #${index} 处理完成`);
-      } else {
-        console.error(`代码块 #${index} 没有父元素，无法处理`);
-      }
-    } catch (err) {
-      console.error(`处理代码块 #${index} 时出错:`, err);
+      // 创建代码体容器
+      const codeBody = document.createElement('div');
+      codeBody.className = 'code-body';
+      
+      // 获取原始的pre和code标签
+      const originalPre = pre.cloneNode(true);
+      
+      // 添加元素到展示容器
+      codeBody.appendChild(originalPre);
+      showcase.appendChild(header);
+      showcase.appendChild(codeBody);
+      
+      // 替换原始的pre标签
+      pre.parentNode.replaceChild(showcase, pre);
+      
+      console.log(`成功增强代码块 #${index}`);
+    } catch (error) {
+      console.error(`增强代码块 #${index} 时出错:`, error);
     }
   });
-  
-  console.log(`所有代码块处理完成，成功处理了 ${processedCount} 个代码块`);
-  
-  // 如果没有处理任何代码块，可能是DOM还没有完全准备好，再次尝试
-  if (processedCount === 0 && preElements.length > 0) {
-    console.log("没有处理任何代码块，1秒后再次尝试");
-    setTimeout(enhanceAllCodeBlocks, 1000);
-  }
 }
 
-/**
- * 复制文本到剪贴板
- */
+// 复制文本到剪贴板
 function copyTextToClipboard(text, button) {
-  // 使用现代剪贴板API复制文本
-  if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(text)
-      .then(function() {
-        showCopySuccess(button);
-      })
-      .catch(function(err) {
-        console.error('复制失败 (Clipboard API):', err);
-        fallbackCopy(text, button);
-      });
-  } else {
-    fallbackCopy(text, button);
-  }
-}
-
-/**
- * 回退的复制方法（使用document.execCommand）
- */
-function fallbackCopy(text, button) {
-  const textarea = document.createElement('textarea');
-  textarea.value = text;
-  textarea.style.position = 'fixed';
-  textarea.style.opacity = '0';
-  document.body.appendChild(textarea);
-  textarea.select();
+  // 创建临时文本区域
+  const textArea = document.createElement('textarea');
+  textArea.value = text;
+  textArea.style.position = 'absolute';
+  textArea.style.left = '-9999px';
+  document.body.appendChild(textArea);
   
   try {
+    // 选择并复制文本
+    textArea.select();
     const successful = document.execCommand('copy');
-    showCopySuccess(button, successful);
+    
+    // 设置反馈状态
+    if (successful) {
+      // 原图标
+      const originalHTML = button.innerHTML;
+      
+      // 显示成功图标
+      button.innerHTML = '<i class="fas fa-check"></i>';
+      button.classList.add('copy-success');
+      
+      // 2秒后恢复原状态
+      setTimeout(function() {
+        button.innerHTML = originalHTML;
+        button.classList.remove('copy-success');
+      }, 2000);
+    }
   } catch (err) {
-    console.error('复制失败 (execCommand):', err);
-    button.textContent = '复制失败';
-    setTimeout(function() {
-      button.textContent = '复制';
-    }, 2000);
+    console.error('复制失败:', err);
   }
   
-  document.body.removeChild(textarea);
+  // 移除临时文本区域
+  document.body.removeChild(textArea);
 }
 
-/**
- * 显示复制成功的反馈
- */
-function showCopySuccess(button, successful = true) {
-  button.textContent = successful ? '已复制!' : '复制失败';
-  button.classList.add(successful ? 'copy-success' : 'copy-error');
-  
+// 监听页面加载完成，确保应用样式
+window.addEventListener('load', function() {
+  // 确保代码块被处理
   setTimeout(function() {
-    button.textContent = '复制';
-    button.classList.remove('copy-success', 'copy-error');
-  }, 2000);
-}
-
-/**
- * 添加自定义样式
- */
-function addCustomStyles() {
-  if (document.getElementById('code-showcase-styles')) return;
-  
-  const styleElement = document.createElement('style');
-  styleElement.id = 'code-showcase-styles';
-  styleElement.textContent = `
-    /* 复制按钮的额外样式 */
-    .copy-success {
-      background: rgba(40, 167, 69, 0.3) !important;
+    if (document.querySelectorAll('.code-showcase').length === 0) {
+      console.log('页面加载后重新初始化代码展示功能');
+      initCodeShowcase();
     }
     
-    .copy-error {
-      background: rgba(220, 53, 69, 0.3) !important;
-    }
+    // 确保样式正确应用
+    enforceStyles();
     
-    /* 确保代码块内的文本可以选择 */
-    .code-body pre, .code-body code {
-      user-select: text;
-      background-color: var(--dark-bg) !important;
-    }
-    
-    /* 确保复制按钮始终可见 */
-    .copy-button {
-      z-index: 10;
-    }
-    
-    /* 添加转换效果 */
-    .code-showcase {
-      transition: all 0.3s ease;
-    }
-    
-    /* 改进代码块内部样式 */
-    .code-body pre {
-      border-radius: 0 0 8px 8px !important;
-      background-color: var(--dark-bg) !important;
-    }
-    
-    /* 确保代码文本颜色 */
-    .code-body pre code {
-      color: var(--code-text) !important;
-      background-color: transparent !important;
-    }
-    
-    /* 确保span元素颜色正确 */
-    .code-body pre code span {
-      background-color: transparent !important;
-    }
-  `;
-  
-  document.head.appendChild(styleElement);
-} 
+    // 额外的检查，确保样式持续应用
+    setInterval(enforceStyles, 2000);
+  }, 500);
+}); 
