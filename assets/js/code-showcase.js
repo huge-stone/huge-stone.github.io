@@ -2,10 +2,19 @@
  * 代码展示功能 - 改进版
  */
 
-// 等待页面完全加载
-window.addEventListener('load', function() {
-  console.log("页面完全加载，初始化代码展示功能");
-  initCodeShowcase();
+// 等待页面和highlight.js完全加载
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("DOM加载完成，等待页面资源加载");
+  
+  // 确保所有资源都加载完毕再运行代码
+  if (document.readyState === 'complete') {
+    initCodeShowcase();
+  } else {
+    window.addEventListener('load', function() {
+      console.log("页面完全加载，初始化代码展示功能");
+      initCodeShowcase();
+    });
+  }
 });
 
 /**
@@ -15,10 +24,11 @@ function initCodeShowcase() {
   // 添加自定义样式（确保样式先加载）
   addCustomStyles();
   
-  // 延迟处理代码块，确保DOM和高亮完全应用
+  // 确保highlight.js已经处理了代码块
   setTimeout(function() {
+    console.log("处理代码块...");
     enhanceAllCodeBlocks();
-  }, 500);
+  }, 800); // 延长延迟确保highlight.js有足够时间处理代码
 }
 
 /**
@@ -38,26 +48,27 @@ function enhanceAllCodeBlocks() {
   let processedCount = 0;
   
   preElements.forEach(function(pre, index) {
-    // 跳过已处理的代码块
-    if (pre.parentNode && pre.parentNode.classList && pre.parentNode.classList.contains('code-body')) {
-      console.log(`跳过已处理的pre元素 #${index}`);
-      return;
-    }
-    
-    const codeElement = pre.querySelector('code');
-    if (!codeElement) {
-      console.log(`pre元素 #${index} 没有code子元素，跳过`);
-      return;
-    }
-    
-    console.log(`处理代码块 #${index}`);
-    
     try {
+      // 跳过已处理的代码块
+      if (pre.parentNode && pre.parentNode.classList && pre.parentNode.classList.contains('code-body')) {
+        console.log(`跳过已处理的pre元素 #${index}`);
+        return;
+      }
+      
+      const codeElement = pre.querySelector('code');
+      if (!codeElement) {
+        console.log(`pre元素 #${index} 没有code子元素，跳过`);
+        return;
+      }
+      
+      console.log(`处理代码块 #${index}`);
+      
       // 获取语言信息
       let language = '';
       if (codeElement.className) {
-        const match = codeElement.className.match(/language-(\w+)/);
-        if (match) language = match[1];
+        // 尝试从highlight.js的类中提取语言
+        const hlMatch = codeElement.className.match(/language-(\w+)/) || codeElement.className.match(/hljs (\w+)/);
+        if (hlMatch) language = hlMatch[1];
       }
       
       // 创建包装容器
@@ -99,8 +110,10 @@ function enhanceAllCodeBlocks() {
       
       // 只有当父元素存在时才进行替换
       if (parent) {
-        // 克隆pre元素以避免引用问题
+        // 深度克隆pre元素以保留highlight.js的样式
         const preClone = pre.cloneNode(true);
+        
+        // 构建新的结构
         wrapper.appendChild(header);
         codeBody.appendChild(preClone);
         codeBody.appendChild(copyButton);
@@ -211,6 +224,16 @@ function addCustomStyles() {
     /* 确保复制按钮始终可见 */
     .copy-button {
       z-index: 10;
+    }
+    
+    /* 添加转换效果 */
+    .code-showcase {
+      transition: all 0.3s ease;
+    }
+    
+    /* 改进代码块内部样式 */
+    .code-body pre {
+      border-radius: 0 0 8px 8px !important;
     }
   `;
   
