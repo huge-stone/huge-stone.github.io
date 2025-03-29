@@ -5,19 +5,19 @@
   --primary-color: #4caf50; /* 绿色主色调 */
   --secondary-color: #2c3e50;
   --accent-color: #66bb6a;
-  --gradient-start: #f5f8f5;
-  --gradient-end: #edf5ed;
+  --gradient-start: #f7faf7;
+  --gradient-end: #f0f7f0;
   --text-color: #2d3748;
   --text-light: #5a6578;
-  --light-bg: #edf5ed;
+  --light-bg: #f2f8f2;
   --dark-bg: #2d3748;
-  --border-color: #dce8dc;
+  --border-color: #e0ece0;
   --card-bg: #ffffff;
-  --background-color: #f0f5f0; /* 淡绿色背景 */
+  --background-color: #f5f9f5; /* 更淡的绿色背景 */
   --card-shadow: 0 2px 10px rgba(0,0,0,0.05);
   --hover-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  --footer-bg: #e8f1e8;
-  --code-bg: #f1f5f1;
+  --footer-bg: #edf5ed;
+  --code-bg: #f3f8f3;
 }
 
 /* 全局样式 */
@@ -355,6 +355,7 @@ a {
   background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
   border-radius: 12px;
   box-shadow: var(--card-shadow);
+  border: 1px solid var(--border-color);
 }
 
 /* 主要内容区域 */
@@ -376,6 +377,7 @@ a {
 .post-item:hover {
   transform: translateY(-3px);
   box-shadow: var(--hover-shadow);
+  border-color: var(--primary-color);
 }
 
 /* 特性区域 */
