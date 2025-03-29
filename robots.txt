@@ -1,0 +1,10 @@
+# 允许所有爬虫
+User-agent: *
+Allow: /
+
+# 阻止爬虫访问特定目录
+Disallow: /assets/
+Disallow: /.github/
+
+# 网站地图
+Sitemap: https://huge-stone.github.io/sitemap.xml 

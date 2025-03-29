@@ -7,24 +7,156 @@
   <meta name="apple-mobile-web-app-capable" content="yes"> <!-- iOS Web App模式 -->
   <meta name="apple-mobile-web-app-status-bar-style" content="default"> <!-- iOS状态栏样式 -->
   
-  <!-- 覆盖默认的SEO标题，确保所有页面保持一致的网站标题 -->
+  <!-- SEO优化 - 元标签 -->
   <title>{% if page.title %}{{ page.title | escape }} - {% endif %}{{ site.title | escape }}</title>
-  <meta property="og:title" content="{% if page.title %}{{ page.title | escape }} - {% endif %}{{ site.title | escape }}">
-  <meta name="twitter:title" content="{% if page.title %}{{ page.title | escape }} - {% endif %}{{ site.title | escape }}">
-  <meta name="description" content="{{ site.description }}">
-  <meta property="og:description" content="{{ site.description }}">
-  <meta name="twitter:description" content="{{ site.description }}">
   
+  <!-- 基本元数据 -->
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="author" content="{{ site.author | default: site.title }}">
+  <meta name="keywords" content="{% if page.tags %}{{ page.tags | join: ', ' }}{% else %}AGI, 人工智能, 大语言模型, 深度学习{% endif %}">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:title" content="{% if page.title %}{{ page.title | escape }} - {% endif %}{{ site.title | escape }}">
+  <meta property="og:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta property="og:image" content="{% if page.image %}{{ page.image | absolute_url }}{% else %}{{ '/assets/images/default-og-image.jpg' | absolute_url }}{% endif %}">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="{{ page.url | absolute_url }}">
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title | escape }} - {% endif %}{{ site.title | escape }}">
+  <meta name="twitter:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="twitter:image" content="{% if page.image %}{{ page.image | absolute_url }}{% else %}{{ '/assets/images/default-og-image.jpg' | absolute_url }}{% endif %}">
+  
+  <!-- 结构化数据 - 基本网站信息 -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "{% if page.layout == 'post' %}BlogPosting{% else %}WebSite{% endif %}",
+      "headline": "{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}",
+      "description": "{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}",
+      "url": "{{ page.url | absolute_url }}",
+      {% if page.layout == 'post' %}
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+      "author": {
+        "@type": "Person",
+        "name": "{{ page.author | default: site.author | default: site.title }}"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ page.url | absolute_url }}"
+      },
+      {% if page.image %}
+      "image": {
+        "@type": "ImageObject",
+        "url": "{{ page.image | absolute_url }}"
+      },
+      {% endif %}
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.title }}",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "{{ '/assets/images/logo.png' | absolute_url }}"
+        }
+      }
+      {% else %}
+      "publisher": {
+        "@type": "Organization",
+        "name": "{{ site.title }}"
+      }
+      {% endif %}
+    }
+  </script>
+  
+  <!-- 性能优化：资源预加载和预连接 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  
+  <!-- 预加载关键资源 -->
+  <link rel="preload" href="{{ '/assets/css/style.css' | relative_url }}" as="style">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" as="style">
+  
+  <!-- 基本样式和字体 -->
   <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Feed和分析 -->
   {%- feed_meta -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}
   {%- endif -%}
   
-  <!-- 预加载字体以加快移动端加载速度 -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- 图片懒加载支持 -->
+  <script>
+    // 检查浏览器是否支持原生懒加载
+    if ('loading' in HTMLImageElement.prototype) {
+      // 使用原生懒加载
+      document.addEventListener('DOMContentLoaded', function() {
+        const images = document.querySelectorAll('img[data-src]');
+        images.forEach(img => {
+          img.src = img.dataset.src;
+          img.loading = 'lazy';
+          img.classList.add('lazyloaded');
+        });
+      });
+    } else {
+      // 回退到自定义懒加载
+      document.addEventListener('DOMContentLoaded', function() {
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        
+        if ("IntersectionObserver" in window) {
+          let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+              if (entry.isIntersecting) {
+                let lazyImage = entry.target;
+                lazyImage.src = lazyImage.dataset.src;
+                lazyImage.classList.add('lazyloaded');
+                lazyImageObserver.unobserve(lazyImage);
+              }
+            });
+          });
+          
+          lazyImages.forEach(function(lazyImage) {
+            lazyImageObserver.observe(lazyImage);
+          });
+        } else {
+          // 对于不支持IntersectionObserver的浏览器，简单实现
+          let active = false;
+          const lazyLoad = function() {
+            if (active === false) {
+              active = true;
+              setTimeout(function() {
+                lazyImages.forEach(function(lazyImage) {
+                  if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== "none") {
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.add('lazyloaded');
+                    lazyImages = lazyImages.filter(function(image) { return image !== lazyImage; });
+                    if (lazyImages.length === 0) {
+                      document.removeEventListener("scroll", lazyLoad);
+                      window.removeEventListener("resize", lazyLoad);
+                      window.removeEventListener("orientationchange", lazyLoad);
+                    }
+                  }
+                });
+                active = false;
+              }, 200);
+            }
+          };
+          document.addEventListener("scroll", lazyLoad);
+          window.addEventListener("resize", lazyLoad);
+          window.addEventListener("orientationchange", lazyLoad);
+          lazyLoad();
+        }
+      });
+    }
+  </script>
   
   <style>
     /* 移动端优先CSS */
