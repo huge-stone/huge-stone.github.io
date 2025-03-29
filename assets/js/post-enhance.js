@@ -14,6 +14,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // 添加返回顶部按钮
   addBackToTopButton();
+  
+  // 添加新功能
+  setupLazyLoading();
+  setupImagePreviews();
 });
 
 /**
@@ -229,4 +233,170 @@ function addBackToTopButton() {
     }
   `;
   document.head.appendChild(backToTopStyle);
+}
+
+/**
+ * 图片懒加载功能
+ */
+function setupLazyLoading() {
+  if ('loading' in HTMLImageElement.prototype) {
+    // 原生懒加载
+    const images = document.querySelectorAll('img[data-src]');
+    images.forEach(img => {
+      img.src = img.dataset.src;
+    });
+  } else {
+    // 兼容方案
+    const lazyloadScript = document.createElement('script');
+    lazyloadScript.src = 'https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js';
+    lazyloadScript.onload = function() {
+      const observer = lozad('.lazy', {
+        loaded: function(el) {
+          el.classList.add('loaded');
+        }
+      });
+      observer.observe();
+    };
+    document.head.appendChild(lazyloadScript);
+  }
+}
+
+/**
+ * 图片预览功能
+ */
+function setupImagePreviews() {
+  // 添加图片预览样式
+  const previewStyle = document.createElement('style');
+  previewStyle.textContent = `
+    .image-preview-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.3s;
+      cursor: zoom-out;
+    }
+    
+    .image-preview-overlay.visible {
+      opacity: 1;
+    }
+    
+    .image-preview-container {
+      max-width: 90%;
+      max-height: 90%;
+      position: relative;
+    }
+    
+    .image-preview {
+      max-width: 100%;
+      max-height: 90vh;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+      transform: scale(0.95);
+      transition: transform 0.3s;
+      cursor: default;
+    }
+    
+    .image-preview-overlay.visible .image-preview {
+      transform: scale(1);
+    }
+    
+    .preview-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .preview-caption {
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      right: 0;
+      color: white;
+      text-align: center;
+      font-size: 14px;
+    }
+  `;
+  document.head.appendChild(previewStyle);
+  
+  // 为文章内的图片添加预览功能
+  const contentImages = document.querySelectorAll('.post-content img:not(.no-preview)');
+  
+  contentImages.forEach(image => {
+    // 让图片可点击
+    image.style.cursor = 'zoom-in';
+    
+    // 添加点击事件
+    image.addEventListener('click', function() {
+      // 创建预览遮罩
+      const overlay = document.createElement('div');
+      overlay.className = 'image-preview-overlay';
+      
+      // 创建预览容器
+      const container = document.createElement('div');
+      container.className = 'image-preview-container';
+      
+      // 创建预览图片
+      const preview = document.createElement('img');
+      preview.className = 'image-preview';
+      preview.src = this.src;
+      preview.alt = this.alt;
+      
+      // 创建关闭按钮
+      const closeBtn = document.createElement('div');
+      closeBtn.className = 'preview-close';
+      closeBtn.innerHTML = '&times;';
+      
+      // 如果有alt属性，添加为图片说明
+      if (this.alt) {
+        const caption = document.createElement('div');
+        caption.className = 'preview-caption';
+        caption.textContent = this.alt;
+        container.appendChild(caption);
+      }
+      
+      // 组装预览界面
+      container.appendChild(preview);
+      container.appendChild(closeBtn);
+      overlay.appendChild(container);
+      document.body.appendChild(overlay);
+      
+      // 显示动画
+      setTimeout(() => {
+        overlay.classList.add('visible');
+      }, 10);
+      
+      // 点击遮罩或关闭按钮关闭预览
+      const closePreview = function() {
+        overlay.classList.remove('visible');
+        setTimeout(() => {
+          document.body.removeChild(overlay);
+        }, 300);
+      };
+      
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) {
+          closePreview();
+        }
+      });
+      
+      closeBtn.addEventListener('click', closePreview);
+      
+      // ESC键关闭预览
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          closePreview();
+        }
+      }, { once: true });
+    });
+  });
 } 

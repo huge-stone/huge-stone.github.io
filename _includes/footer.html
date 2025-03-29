@@ -1,163 +1,256 @@
-<footer class="site-footer">
+<footer class="site-footer h-card">
+  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+
   <div class="wrapper">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h2 class="footer-heading">关于本站</h2>
-        <p class="footer-text">AGI SEEKING - 专注于通用人工智能和大模型前沿技术与实践的分享平台。</p>
-        <div class="social-links">
-          <a href="https://github.com/huge-stone" target="_blank" class="social-link">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="#" class="social-link">
-            <i class="fab fa-weixin"></i>
-          </a>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h2 class="footer-heading">{{ site.title | escape }}</h2>
+        <p>{{ site.description | escape }}</p>
+        
+        <!-- 订阅表单 -->
+        <div class="subscribe-form">
+          <h3>订阅更新</h3>
+          <form action="https://formspree.io/f/your-formspree-id" method="POST" class="subscribe">
+            <input type="email" name="email" placeholder="您的邮箱地址" required>
+            <button type="submit">订阅</button>
+          </form>
         </div>
       </div>
       
-      <div class="footer-section">
-        <h2 class="footer-heading">导航</h2>
-        <ul class="footer-nav">
-          <li><a href="/tutorials/">大模型理论</a></li>
-          <li><a href="/tags/">技术专题</a></li>
-          <li><a href="/projects/">项目实践</a></li>
-          <li><a href="/resources/">资源导航</a></li>
+      <div class="footer-col">
+        <h3>链接</h3>
+        <ul class="footer-links">
+          <li><a href="/about/">关于我们</a></li>
+          <li><a href="/tags/">文章标签</a></li>
+          <li><a href="/categories/">文章分类</a></li>
+          <li><a href="/archives/">文章归档</a></li>
+          <li><a href="/contact/">联系我们</a></li>
         </ul>
       </div>
       
-      <div class="footer-section">
-        <h2 class="footer-heading">资源</h2>
-        <ul class="footer-nav">
-          <li><a href="/search/">站内搜索</a></li>
-          <li><a href="https://jekyllrb.com/" target="_blank">Jekyll官网</a></li>
-          <li><a href="https://github.com/huge-stone/huge-stone.github.io" target="_blank">网站源码</a></li>
+      <div class="footer-col">
+        <h3>联系我们</h3>
+        <ul class="contact-list">
+          <li class="p-name">
+            {%- if site.author -%}
+              {{ site.author | escape }}
+            {%- else -%}
+              {{ site.title | escape }}
+            {%- endif -%}
+          </li>
+          {%- if site.email -%}
+          <li><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+          {%- endif -%}
         </ul>
+        
+        <!-- 社交媒体链接 -->
+        <div class="social-links">
+          {%- if site.github_username -%}
+          <a href="https://github.com/{{ site.github_username }}" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+          {%- endif -%}
+          {%- if site.twitter_username -%}
+          <a href="https://twitter.com/{{ site.twitter_username }}" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+          {%- endif -%}
+          {%- if site.linkedin_username -%}
+          <a href="https://linkedin.com/in/{{ site.linkedin_username }}" title="LinkedIn" target="_blank"><i class="fab fa-linkedin"></i></a>
+          {%- endif -%}
+          {%- if site.weibo_username -%}
+          <a href="https://weibo.com/{{ site.weibo_username }}" title="微博" target="_blank"><i class="fab fa-weibo"></i></a>
+          {%- endif -%}
+          <a href="{{ "/feed.xml" | relative_url }}" title="RSS订阅" target="_blank"><i class="fas fa-rss"></i></a>
+        </div>
       </div>
     </div>
-    
+
     <div class="footer-bottom">
-      <p class="copyright">© {{ site.time | date: '%Y' }} AGI SEEKING. 保留所有权利.</p>
-      <p class="powered-by">由 <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> 强力驱动</p>
+      <p>© {{ 'now' | date: "%Y" }} {{ site.title | escape }}. 保留所有权利。</p>
+      <p>由 <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> 驱动 | 托管于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
     </div>
   </div>
 </footer>
 
+<!-- 返回顶部按钮 -->
+<button id="back-to-top" title="返回顶部"><i class="fas fa-arrow-up"></i></button>
+
+<script>
+  // 返回顶部按钮
+  var backToTopButton = document.getElementById("back-to-top");
+  
+  window.addEventListener("scroll", function() {
+    if (window.pageYOffset > 300) {
+      backToTopButton.style.display = "block";
+    } else {
+      backToTopButton.style.display = "none";
+    }
+  });
+  
+  backToTopButton.addEventListener("click", function() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+</script>
+
 <style>
+  /* 页脚样式 */
   .site-footer {
-    background-color: #f5f5f5;
-    color: #555;
-    padding: 30px 0 20px;
-    border-top: 1px solid #e9e9e9;
-    font-size: 0.95rem;
+    padding: 40px 0 20px;
+    background-color: var(--footer-bg);
+    border-top: 1px solid var(--border-color);
   }
   
-  .footer-content {
+  .footer-cols {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
     margin-bottom: 30px;
   }
   
-  .footer-section {
+  .footer-heading {
     margin-bottom: 15px;
+    font-weight: 600;
+    color: var(--primary-color);
   }
   
-  .footer-heading {
-    color: var(--primary-color);
+  .footer-col h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
     font-size: 1.1rem;
-    margin-bottom: 12px;
+    color: var(--primary-color);
     font-weight: 600;
   }
   
-  .footer-text {
-    line-height: 1.5;
-    margin-bottom: 15px;
-    color: #666;
-    font-size: 0.9rem;
+  .contact-list,
+  .footer-links {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  
+  .contact-list li,
+  .footer-links li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  
+  .footer-links a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
   }
   
   .social-links {
+    margin-top: 15px;
     display: flex;
     gap: 12px;
   }
   
-  .social-link {
-    display: flex;
+  .social-links a {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
-    background: #eee;
+    width: 36px;
+    height: 36px;
+    background-color: var(--light-bg);
+    color: var(--primary-color);
     border-radius: 50%;
     transition: all 0.3s;
-    color: #555;
-    text-decoration: none;
-    font-size: 1.1rem;
   }
   
-  .social-link:hover {
-    background: var(--primary-color);
+  .social-links a:hover {
+    background-color: var(--primary-color);
     color: white;
-    transform: translateY(-2px);
-  }
-  
-  .footer-nav {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .footer-nav li {
-    margin-bottom: 8px;
-  }
-  
-  .footer-nav a {
-    color: #666;
-    text-decoration: none;
-    transition: all 0.3s;
-    font-size: 0.9rem;
-  }
-  
-  .footer-nav a:hover {
-    color: var(--primary-color);
-    padding-left: 3px;
+    transform: translateY(-3px);
   }
   
   .footer-bottom {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.9rem;
+  }
+  
+  .footer-bottom p {
+    margin: 5px 0;
+  }
+  
+  /* 订阅表单 */
+  .subscribe-form {
+    margin-top: 15px;
+  }
+  
+  .subscribe {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 15px;
-    border-top: 1px solid #e9e9e9;
-    color: #888;
-    font-size: 0.85rem;
+    margin-top: 10px;
   }
   
-  .powered-by a {
-    color: var(--primary-color);
-    text-decoration: none;
+  .subscribe input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px 0 0 4px;
+    font-size: 0.9rem;
   }
   
-  .powered-by a:hover {
-    text-decoration: underline;
+  .subscribe button {
+    padding: 8px 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    transition: background-color 0.2s;
   }
   
-  @media (max-width: 768px) {
-    .footer-content {
+  .subscribe button:hover {
+    background-color: darken(var(--primary-color), 10%);
+  }
+  
+  /* 返回顶部按钮 */
+  #back-to-top {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.3s;
+    z-index: 999;
+  }
+  
+  #back-to-top:hover {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+  
+  @media screen and (max-width: 767px) {
+    .footer-cols {
       grid-template-columns: 1fr;
-      gap: 25px;
+      gap: 20px;
     }
     
-    .footer-bottom {
-      flex-direction: column;
-      text-align: center;
+    .footer-col {
+      margin-bottom: 15px;
     }
     
-    .copyright {
-      margin-bottom: 8px;
-    }
-    
-    .footer-section {
-      margin-bottom: 10px;
+    #back-to-top {
+      width: 36px;
+      height: 36px;
+      bottom: 15px;
+      right: 15px;
     }
   }
 </style> 

@@ -24,8 +24,18 @@ description: >- # this means to ignore newlines until "baseurl:"
   探索通用人工智能前沿技术与最佳实践，分享大模型理论与落地经验。
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://huge-stone.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+author: AGI SEEKING Team # 添加作者信息
 twitter_username: 
-github_username:  huge-stone
+github_username: huge-stone
+linkedin_username:
+weibo_username:
+zhihu_username:
+
+# 联系信息
+contact:
+  email: your-email@example.com
+  wechat: your-wechat
+  qq: your-qq-number
 
 # 添加页面集合配置
 include: ["_pages"]

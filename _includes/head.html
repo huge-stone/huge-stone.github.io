@@ -289,4 +289,165 @@
       background: rgba(255, 255, 255, 0.2);
     }
   </style>
-</head> 
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- 预加载字体 -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap"></noscript>
+  
+  <!-- PWA和Web App Manifest支持 -->
+  <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
+  <meta name="theme-color" content="#4caf50">
+  <meta name="apple-mobile-web-app-title" content="{{ site.title }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/images/icons/icon-192x192.png' | relative_url }}">
+  
+  <style>
+    /* 页面加载动画 */
+    .page-loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.3s ease-out;
+    }
+    .page-loading.loaded {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loader {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* 打印样式优化 */
+    @media print {
+      .site-header, .site-footer, .share-buttons, .comments-section {
+        display: none !important;
+      }
+      body {
+        font-size: 12pt;
+        color: #000;
+        background: #fff;
+      }
+      .post-content {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        color: #000 !important;
+        text-decoration: none;
+      }
+      a::after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        color: #666;
+      }
+    }
+  </style>
+  
+  <!-- 页面加载动画脚本 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        const loader = document.querySelector('.page-loading');
+        if (loader) {
+          loader.classList.add('loaded');
+          setTimeout(function() {
+            loader.style.display = 'none';
+          }, 300);
+        }
+      }, 500);
+    });
+  </script>
+
+  <!-- 结构化数据 - 网站 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ site.title }}",
+    "url": "{{ site.url }}",
+    "description": "{{ site.description }}",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ site.url }}/search/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  
+  <!-- 结构化数据 - 组织 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "{{ site.title }}",
+    "url": "{{ site.url }}",
+    "logo": "{{ site.url }}/assets/images/icons/icon-512x512.png",
+    "sameAs": [
+      {% if site.github_username %}"https://github.com/{{ site.github_username }}",{% endif %}
+      {% if site.twitter_username %}"https://twitter.com/{{ site.twitter_username }}",{% endif %}
+      {% if site.linkedin_username %}"https://linkedin.com/in/{{ site.linkedin_username }}",{% endif %}
+      {% if site.weibo_username %}"https://weibo.com/{{ site.weibo_username }}"{% endif %}
+    ]
+  }
+  </script>
+  
+  {% if page.layout == 'post' %}
+  <!-- 结构化数据 - 文章 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ page.url | absolute_url }}"
+    },
+    "headline": "{{ page.title | escape }}",
+    "description": "{{ page.excerpt | strip_html | normalize_whitespace | truncate: 150 | escape }}",
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    {% if page.last_modified_at %}
+    "dateModified": "{{ page.last_modified_at | date_to_xmlschema }}",
+    {% else %}
+    "dateModified": "{{ page.date | date_to_xmlschema }}",
+    {% endif %}
+    "author": {
+      "@type": "Person",
+      "name": "{{ page.author | default: site.author | escape }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ site.title }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ site.url }}/assets/images/icons/icon-512x512.png",
+        "width": 512,
+        "height": 512
+      }
+    }
+  }
+  </script>
+  {% endif %}
+</head>
+
+<!-- 页面加载动画 -->
+<div class="page-loading">
+  <div class="loader"></div>
+</div> 
