@@ -67,6 +67,21 @@ exclude:
   - vendor/gems/
   - vendor/ruby/
 
+# 添加Utterances评论系统配置 (推荐使用，更轻量级)
+utterances:
+  repo: huge-stone/huge-stone.github.io # GitHub仓库，格式为"用户名/仓库名"
+  issue-term: pathname # 使用哪些文本作为issue标题，可选：pathname, url, title, og:title
+  theme: github-light # 可选主题：github-light, github-dark, preferred-color-scheme, github-dark-orange, icy-dark, dark-blue, photon-dark, boxy-light
+
+# 添加Gitalk评论系统配置
+gitalk:
+  enable: false # 将Gitalk禁用，优先使用Utterances
+  client_id: # GitHub Application Client ID
+  client_secret: # GitHub Application Client Secret
+  repo: huge-stone.github.io # GitHub仓库名
+  owner: huge-stone # GitHub仓库所有者
+  admin: huge-stone # 管理员GitHub用户名，可以是多个
+  
 # 添加Disqus评论系统配置
 # 如果您没有注册Disqus或不需要评论功能，请删除或注释掉以下内容
 # disqus:

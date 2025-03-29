@@ -84,12 +84,22 @@ layout: default
   </div>
 
   <!-- 评论区 -->
-  {% if site.disqus.shortname %}
   <div class="comments-section">
     <h3>评论</h3>
-    {%- include disqus_comments.html -%}
+    {% if site.utterances.repo %}
+      {%- include utterances.html -%}
+    {% elsif site.gitalk.enable %}
+      {%- include gitalk.html -%}
+    {% elsif site.disqus.shortname %}
+      {%- include disqus_comments.html -%}
+    {% else %}
+      <div class="default-comment-system">
+        <div class="comment-system-placeholder">
+          <p>评论系统尚未配置。请在_config.yml中设置Utterances、Gitalk或Disqus评论系统。</p>
+        </div>
+      </div>
+    {% endif %}
   </div>
-  {% endif %}
 
   <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 </article>
@@ -189,6 +199,20 @@ layout: default
   .share-buttons a:hover {
     background: #e5e5e5;
     transform: translateY(-2px);
+  }
+  
+  .default-comment-system {
+    background-color: var(--light-bg);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    margin-top: 20px;
+    border: 1px dashed var(--border-color);
+  }
+  
+  .comment-system-placeholder p {
+    color: var(--text-light);
+    margin: 0;
   }
   
   @media screen and (max-width: 767px) {
